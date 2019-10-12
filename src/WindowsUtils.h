@@ -2,7 +2,7 @@
 #include <string>
 #include <windows.h>
 
-struct WindowInfo
+typedef struct WindowInfo
 {
 	HWND hWnd;
 	std::string windowTitle;

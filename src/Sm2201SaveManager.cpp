@@ -71,10 +71,9 @@ void MossbauerLab::Sm2201::Sm2201SaveManager::LoadConfig()
 	{
 	    // read configuration properties key=value
 		std::string keyValuePair = lineBuffer;
-        if(lineBuffer.find("")
-		{
-		    
-		}
+        //if(lineBuffer.find("")
+		//{
+		//}
 	}
 	configReader.close();
 }
