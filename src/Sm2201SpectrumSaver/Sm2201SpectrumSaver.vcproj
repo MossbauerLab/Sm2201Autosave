@@ -298,6 +298,10 @@
 			Filter="h;hpp;hxx;hm;inl"
 			>
 			<File
+				RelativePath=".\PropertyReader.h"
+				>
+			</File>
+			<File
 				RelativePath="Sm2201SaveManager.h"
 				>
 			</File>
