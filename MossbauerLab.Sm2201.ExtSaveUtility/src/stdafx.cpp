@@ -1,6 +1,6 @@
 // stdafx.cpp : source file that includes just the standard includes
-//	Sm2201SpectrumSaver.pch will be the pre-compiled header
-//	stdafx.obj will contain the pre-compiled type information
+// MossbauerLab.Sm2201.ExtSaveUtility.pch will be the pre-compiled header
+// stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"
 

@@ -2,8 +2,8 @@
 //
 
 #include "stdafx.h"
-#include "Sm2201SaveManager.h"
-#include "WindowsUtils.h"
+//#include "Sm2201SaveManager.h"
+//#include "WindowsUtils.h"
 #include <iostream>
 //#include <iomanip.h>
 
@@ -26,7 +26,7 @@
 int main(int argc, char* argv[])
 {
 	std::cout << " ===== >>> Spectrum saver is running <<< =====" << std::endl;
-	char userInput[256];
+	/*char userInput[256];
 	std::vector<WindowInfo> infoList = GetWindowsInfo();
     for(int i = 0; i < infoList.size(); i++)
 	{
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	std::string condigFilePath = ".\\sm2201AutosaveConfig.cfg";
 	MossbauerLab::Sm2201::Sm2201SaveManager manager(condigFilePath);
 	manager.Start();
-	manager.Stop();
+	manager.Stop();*/
 	std::cout << " ===== >>> Spectrum saver is stopping <<< =====" << std::endl;
 	return 0;
 }
