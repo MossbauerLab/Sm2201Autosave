@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MossbauerLab.Sm2201.ExtSaveUtility", "MossbauerLab.Sm2201.ExtSaveUtility\MossbauerLab.Sm2201.ExtSaveUtility.vcproj", "{40AA8549-8DD5-4F10-8106-C7E3A50FCC89}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26D6DC06-894F-40DB-8C8F-FA95B8B4D1A2}"
+	ProjectSection(SolutionItems) = preProject
+		MossbauerLab.Sm2201.ExtSaveUtility.vsmdi = MossbauerLab.Sm2201.ExtSaveUtility.vsmdi
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MossbauerLab.Sm2201.ExtSaveUtility.Tests", "MossbauerLab.Sm2201.ExtSaveUtility.Tests\MossbauerLab.Sm2201.ExtSaveUtility.Tests.vcproj", "{F87759D0-D0D2-43F5-A134-8123A87330EE}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MossbauerLab.Sm2201.ExtSaveUtility.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
@@ -13,6 +23,10 @@ Global
 		{40AA8549-8DD5-4F10-8106-C7E3A50FCC89}.Debug|Win32.Build.0 = Debug|Win32
 		{40AA8549-8DD5-4F10-8106-C7E3A50FCC89}.Release|Win32.ActiveCfg = Release|Win32
 		{40AA8549-8DD5-4F10-8106-C7E3A50FCC89}.Release|Win32.Build.0 = Release|Win32
+		{F87759D0-D0D2-43F5-A134-8123A87330EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F87759D0-D0D2-43F5-A134-8123A87330EE}.Debug|Win32.Build.0 = Debug|Win32
+		{F87759D0-D0D2-43F5-A134-8123A87330EE}.Release|Win32.ActiveCfg = Release|Win32
+		{F87759D0-D0D2-43F5-A134-8123A87330EE}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

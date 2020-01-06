@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="MossbauerLab.Sm2201.ExtSaveUtility"
-	ProjectGUID="{40AA8549-8DD5-4F10-8106-C7E3A50FCC89}"
-	RootNamespace="MossbauerLabSm2201ExtSaveUtility"
+	Name="MossbauerLab.Sm2201.ExtSaveUtility.Tests"
+	ProjectGUID="{F87759D0-D0D2-43F5-A134-8123A87330EE}"
+	RootNamespace="MossbauerLabSm2201ExtSaveUtilityTests"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,12 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(ProjectDir)src\utils\config&quot;"
+				AdditionalIncludeDirectories="SolutionDir\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config;SolutionDir\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings;SolutionDir\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -172,15 +172,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\main.cpp"
+				RelativePath=".\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\utils\config\propertyReader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\stdafx.cpp"
+				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -206,15 +202,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\src\utils\config\propertyReader.h"
+				RelativePath=".\stdafx.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\targetver.h"
+				RelativePath=".\targetver.h"
 				>
 			</File>
 		</Filter>
@@ -224,6 +216,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath=".\ReadMe.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
