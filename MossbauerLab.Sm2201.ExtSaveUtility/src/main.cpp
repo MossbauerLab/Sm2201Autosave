@@ -1,7 +1,7 @@
 // Sm2201SpectrumSaver.cpp : Defines the entry point for the application.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 //#include "Sm2201SaveManager.h"
 //#include "WindowsUtils.h"
 #include <iostream>

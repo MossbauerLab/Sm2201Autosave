@@ -180,26 +180,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\stdafx.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\src\utils\strings\strBaseUtils.cpp"
 				>
 			</File>
@@ -214,15 +194,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\stdafx.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\utils\strings\strBaseUtils.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\targetver.h"
 				>
 			</File>
 		</Filter>
