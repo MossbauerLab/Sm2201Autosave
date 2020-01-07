@@ -3,10 +3,11 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="MossbauerLab.Sm2201.ExtSaveUtility.Tests"
-	ProjectGUID="{F87759D0-D0D2-43F5-A134-8123A87330EE}"
-	RootNamespace="MossbauerLabSm2201ExtSaveUtilityTests"
-	Keyword="Win32Proj"
-	TargetFrameworkVersion="196613"
+	ProjectTypes="{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+	ProjectGUID="{7C2937A6-0EFC-4D57-9CD7-E8EE24F8C56A}"
+	RootNamespace="MossbauerLabSm2201ExtSaveutilityTests"
+	Keyword="ManagedCProj"
+	TargetFrameworkVersion="0"
 	>
 	<Platforms>
 		<Platform
@@ -20,8 +21,9 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
+			ManagedExtensions="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,14 +43,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(SolutionDir)MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config&quot;;&quot;$(SolutionDir)MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings&quot;;&quot;$(SolutionDir)MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(SolutionDir)MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -61,9 +61,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				AssemblyDebug="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -86,14 +87,16 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="if exist app.config copy app.config &quot;$(OutDir)\app.config&quot;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
+			ManagedExtensions="3"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -113,11 +116,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;NDEBUG"
 				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				DebugInformationFormat="3"
@@ -133,11 +133,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="$(NoInherit)"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
-				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -160,10 +158,31 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="if exist app.config copy app.config &quot;$(OutDir)\app.config&quot;"
 			/>
 		</Configuration>
 	</Configurations>
 	<References>
+		<AssemblyReference
+			RelativePath="System.dll"
+			AssemblyName="System, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.Data.dll"
+			AssemblyName="System.Data, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=x86"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="System.XML.dll"
+			AssemblyName="System.Xml, Version=2.0.0.0, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
+		<AssemblyReference
+			RelativePath="Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll"
+			AssemblyName="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+			MinFrameworkVersion="131072"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -172,7 +191,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\main.cpp"
+				RelativePath=".\src\AssemblyInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\PropertyReaderTests.cpp"
 				>
 			</File>
 		</Filter>
