@@ -21,9 +21,8 @@ void MossbauerLab::Utils::Config::PropertyReader::reload()
     std::string line;
     while(propertyFileReader.good())
     {
-        propertyFileReader >> line;
+        std::getline(propertyFileReader, line);
         int index = line.find("=");
-        // todo: split
         if (index > 0)
         {
             std::string key = line.substr(0, index);
