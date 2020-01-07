@@ -1,7 +1,7 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_CONFIG_PROPERTY_READER_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_CONFIG_PROPERTY_READER_H
 #include <string>
-#include <vector>
+#include <map>
 
 namespace MossbauerLab
 {
@@ -17,7 +17,7 @@ namespace MossbauerLab
                 void reload();
             private:
                 std::string _fileName;
-                std::vector<std::string> _fileContent;
+                std::map<std::string, std::string> _properties;
             };
         }
     }
