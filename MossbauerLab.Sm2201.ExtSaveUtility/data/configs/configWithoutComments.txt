@@ -1,0 +1,5 @@
+propertyInt=110
+propertyFloat=135.567
+propertyStr=sample string (short)
+propertyStrPathWin=C:\Program Data\SM2201\AutoSaves
+propertyDateTime=2020-01-14 16:01:52

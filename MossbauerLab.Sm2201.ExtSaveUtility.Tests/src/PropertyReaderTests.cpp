@@ -1,5 +1,4 @@
 #include "propertyReader.h"
-//#include <vector>
 
 using namespace System;
 using namespace System::Text;
@@ -17,10 +16,49 @@ namespace MossbauerLab
 				[TestClass]
 				public ref class PropertyReaderTests
 				{
-				private:
+                private:
 					TestContext^ testContextInstance;
 
 				public: 
+                    [TestInitialize()]
+					void SetUp()
+					{
+						reader = NULL;
+					}
+
+					[TestCleanup()]
+					void CleanUp() 
+					{
+                        if (reader != NULL)
+							delete reader;
+					};
+                    /// <summary>
+					/// In this tests we have file with different by type pair of properties without spaces
+					/// or comments, we attempt 
+					///</summary>
+					[TestMethod]
+					void TestReadPropertiesWithoutCommentsAndSpaces()
+					{
+						std::string configWithoutComments = "..\\data\\configs\\configWithoutComments.txt";
+						reader = new MossbauerLab::Utils::Config::PropertyReader(configWithoutComments);
+						// todo: get each property and check ...
+					};
+
+					[TestMethod]
+					void TestReadPropertiesWithCommentsAndWhiteSpaces()
+					{
+					};
+
+                    [TestMethod]
+					void TesttReadEmptyPropertyFile()
+					{
+					};
+
+					[TestMethod]
+					void TesttReadpropertiesThatAreNotProperties()
+					{
+					};
+
 					/// <summary>
 					///Gets or sets the test context which provides
 					///information about and functionality for the current test run.
@@ -37,35 +75,12 @@ namespace MossbauerLab
 						}
 					};
 
-					#pragma region Additional test attributes
-					//
-					//You can use the following additional attributes as you write your tests:
-					//
-					//Use ClassInitialize to run code before running the first test in the class
-					//[ClassInitialize()]
-					//static void MyClassInitialize(TestContext^ testContext) {};
-					//
-					//Use ClassCleanup to run code after all tests in a class have run
-					//[ClassCleanup()]
-					//static void MyClassCleanup() {};
-					//
-					//Use TestInitialize to run code before running each test
-					//[TestInitialize()]
-					//void MyTestInitialize() {};
-					//
-					//Use TestCleanup to run code after each test has run
-					//[TestCleanup()]
-					//void MyTestCleanup() {};
-					//
-					#pragma endregion 
-
-					[TestMethod]
-					void TestMethod1()
-					{
-						//
-						// TODO: Add test logic	here
-						//
-					};
+				private:
+					MossbauerLab::Utils::Config::PropertyReader* reader;
+					//std::string configWithoutComments = "..\\data\\configs\\configWithoutComments.txt";
+					//std::string configWithComments = "..\\data\\configs\\configWithComments.txt";
+					//std::string configWithNoContent = "..\\data\\configs\\emptyConfig.txt";
+					//std::string configWithNonPropertiesStr = "..\\data\\configs\\configWithNonPropertiesStr.txt";
 				};
 			}
 		}

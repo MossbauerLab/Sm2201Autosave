@@ -19,7 +19,7 @@ namespace MossbauerLab
                 std::string _fileName;
                 std::vector<std::string> _fileContent;
             };
-		}
+        }
     }
 }
 #endif
