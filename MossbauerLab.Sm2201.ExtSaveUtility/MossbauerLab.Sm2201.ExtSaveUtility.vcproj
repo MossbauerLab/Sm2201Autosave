@@ -199,6 +199,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\src\utils\strings\strBaseUtils.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -211,6 +215,10 @@
 			</File>
 			<File
 				RelativePath=".\src\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\utils\strings\strBaseUtils.h"
 				>
 			</File>
 			<File
