@@ -1,0 +1,11 @@
+# This is a comment
+# integer property
+propertyFloat=135.567
+# 
+## 
+# str property
+propertyStr = sample string (short)
+# str property (path)
+propertyStrPathWin  =  C:\Program Data\SM2201\AutoSaves  
+# datetime property
+propertyDateTime= 2020-01-14 16:01:52  
