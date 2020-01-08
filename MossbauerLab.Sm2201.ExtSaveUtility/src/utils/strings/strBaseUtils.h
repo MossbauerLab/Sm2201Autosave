@@ -1,24 +1,26 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_STRING_BASE_UTILS_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_STRING_BASE_UTILS_H
-/* Utils for work with strings in application that are running on Windows 98
- *
- *
- */
+
 #include <string>
+
+/* Utils for work with strings in application that are running on Windows 98
+ * Because Win98 C++ stdlib don't have utilities for i.e. Trim
+ */
+
 namespace MossbauerLab
 {
-	namespace Utils
-	{
-		namespace Strings
-		{
-			/*std::string ltrim(const char* str)
-			{
-				if (str == NULL)
-					return std::string();
-			}*/
-
-			//std::string rtrim(const char* str);
-		}
-	}
+    namespace Utils
+    {
+        namespace Strings
+        {
+            class StrBaseUtils
+            {
+            public:
+                static std::string ltrim(const char* str);
+                static std::string rtrim(const char* str, int length);
+                static std::string trim(const char* str, int length);
+            };
+        }
+    }
 }
 #endif
