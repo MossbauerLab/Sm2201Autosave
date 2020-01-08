@@ -8,10 +8,17 @@ MossbauerLab::Utils::Config::PropertyReader::PropertyReader(const std::string &f
     reload();
 }
 
+bool MossbauerLab::Utils::Config::PropertyReader::containsKey(const std::string &key) const
+{
+    return _properties.find(key) != _properties.end();
+}
+
 const std::string& MossbauerLab::Utils::Config::PropertyReader::get(const std::string &key) const
 {
-    std::string str;
-    return str;
+    if (!containsKey(key))
+        return "";
+    std::map<std::string, std::string>::const_iterator it = _properties.find(key);
+    return it->second;
 }
 
 void MossbauerLab::Utils::Config::PropertyReader::reload()

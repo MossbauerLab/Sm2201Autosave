@@ -13,6 +13,7 @@ namespace MossbauerLab
             {
             public:
                 PropertyReader(const std::string& fileName);
+                bool containsKey(const std::string& key) const;
                 const std::string& get(const std::string& key) const;
                 void reload();
             private:
