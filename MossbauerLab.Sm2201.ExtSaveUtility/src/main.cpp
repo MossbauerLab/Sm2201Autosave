@@ -3,7 +3,7 @@
 
 //#include "stdafx.h"
 //#include "Sm2201SaveManager.h"
-//#include "WindowsUtils.h"
+#include "windowsInfo.h"
 #include <iostream>
 //#include <iomanip.h>
 
@@ -25,26 +25,26 @@
  *****************************************************************/
 int main(int argc, char* argv[])
 {
-	std::cout << " ===== >>> Spectrum saver is running <<< =====" << std::endl;
-	/*char userInput[256];
-	std::vector<WindowInfo> infoList = GetWindowsInfo();
+    std::cout << " ===== >>> Spectrum saver is running <<< =====" << std::endl;
+    /*char userInput[256];
+    std::vector<WindowInfo> infoList = GetWindowsInfo();
     for(int i = 0; i < infoList.size(); i++)
-	{
-		WindowInfo info = infoList[i];
-		if(info.windowTitle.size() > 0){
-			int exeSearch = info.windowTitle.find("MC");
-			if (exeSearch != std::string::npos)
-		        std::cout << info.processName.c_str()<< ": " << info.windowTitle.c_str() << std::endl;
+    {
+        WindowInfo info = infoList[i];
+        if(info.windowTitle.size() > 0){
+            int exeSearch = info.windowTitle.find("MC");
+            if (exeSearch != std::string::npos)
+                std::cout << info.processName.c_str()<< ": " << info.windowTitle.c_str() << std::endl;
 
-		}
-	}
-	std::cin.getline(userInput, 256);
-	std::string condigFilePath = ".\\sm2201AutosaveConfig.cfg";
-	MossbauerLab::Sm2201::Sm2201SaveManager manager(condigFilePath);
-	manager.Start();
-	manager.Stop();*/
-	std::cout << " ===== >>> Spectrum saver is stopping <<< =====" << std::endl;
-	return 0;
+        }
+    }
+    std::cin.getline(userInput, 256);
+    std::string condigFilePath = ".\\sm2201AutosaveConfig.cfg";
+    MossbauerLab::Sm2201::Sm2201SaveManager manager(condigFilePath);
+    manager.Start();
+    manager.Stop();*/
+    std::cout << " ===== >>> Spectrum saver is stopping <<< =====" << std::endl;
+    return 0;
 }
 
 

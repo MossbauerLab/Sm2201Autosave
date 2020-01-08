@@ -206,6 +206,10 @@
 				RelativePath="..\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings\strBaseUtils.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\WindowsInfoHelperTests.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"

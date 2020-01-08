@@ -65,7 +65,7 @@ namespace MossbauerLab
                     };
 
                     [TestMethod]
-                    void TesttReadEmptyPropertyFile()
+                    void TestReadEmptyPropertyFile()
                     {
                         std::string configWithNoContent = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\emptyConfig.txt";
                         reader = new MossbauerLab::Utils::Config::PropertyReader(configWithNoContent);
@@ -118,10 +118,6 @@ namespace MossbauerLab
 
                 private:
                     MossbauerLab::Utils::Config::PropertyReader* reader;
-                    //std::string configWithoutComments = "..\\data\\configs\\configWithoutComments.txt";
-                    //std::string configWithComments = "..\\data\\configs\\configWithComments.txt";
-                    //std::string configWithNoContent = "..\\data\\configs\\emptyConfig.txt";
-                    //std::string configWithNonPropertiesStr = "..\\data\\configs\\configWithNonPropertiesStr.txt";
                 };
             }
         }
