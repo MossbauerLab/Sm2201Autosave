@@ -1,3 +1,5 @@
+#ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_WINDOWS_INFO_H
+#define SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_WINDOWS_INFO_H
 #include <vector>
 #include <string>
 #include <windows.h>
@@ -26,3 +28,4 @@ namespace MossbauerLab
         }
     }
 }
+#endif

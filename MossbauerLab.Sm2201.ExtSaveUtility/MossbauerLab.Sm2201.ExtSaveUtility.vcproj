@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(ProjectDir)src\utils\config&quot;;&quot;$(ProjectDir)src\utils\strings&quot;;&quot;$(ProjectDir)src\utils\windows&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(ProjectDir)src\utils\config&quot;;&quot;$(ProjectDir)src\utils\strings&quot;;&quot;$(ProjectDir)src\utils\windows&quot;;&quot;$(ProjectDir)src\config&quot;;&quot;$(ProjectDir)src\saveManager&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -172,6 +172,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\src\saveManager\autoSaveManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
@@ -194,7 +198,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\src\saveManager\autoSaveManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\utils\config\propertyReader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\configs\schedulerConfig.h"
 				>
 			</File>
 			<File
