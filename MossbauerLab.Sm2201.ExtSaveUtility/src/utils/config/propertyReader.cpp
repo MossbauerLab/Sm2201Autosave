@@ -37,6 +37,8 @@ void MossbauerLab::Utils::Config::PropertyReader::reload()
         {
             std::string key = line.substr(0, index);
             key = MossbauerLab::Utils::Strings::StrBaseUtils::trim(key.c_str(), key.length());
+            if (key.empty() || key.at(0) == '#')
+                continue;
             std::string value = line.length() - index >= 1 ? line.substr(index + 1, line.length() - (index + 1)) : "";
             if (value.length() >= 1)
                 value = MossbauerLab::Utils::Strings::StrBaseUtils::trim(value.c_str(), value.length());

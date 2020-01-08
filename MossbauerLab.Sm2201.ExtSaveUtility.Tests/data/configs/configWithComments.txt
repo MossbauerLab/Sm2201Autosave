@@ -3,7 +3,7 @@
   propertyInt= 110
 # float property
 propertyFloat=135.567
-# 
+# commentedProperty = 123456789
 ## 
 # str property
 propertyStr = sample string (short)
