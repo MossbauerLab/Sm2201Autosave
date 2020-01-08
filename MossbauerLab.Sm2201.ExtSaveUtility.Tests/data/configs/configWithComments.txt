@@ -1,5 +1,7 @@
 # This is a comment
 # integer property
+  propertyInt= 110
+# float property
 propertyFloat=135.567
 # 
 ## 

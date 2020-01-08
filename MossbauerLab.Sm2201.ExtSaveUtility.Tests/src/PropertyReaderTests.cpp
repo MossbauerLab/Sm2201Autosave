@@ -53,6 +53,9 @@ namespace MossbauerLab
                     [TestMethod]
                     void TestReadPropertiesWithCommentsAndWhiteSpaces()
                     {
+                        std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithComments.txt";
+                        reader = new MossbauerLab::Utils::Config::PropertyReader(configWithoutComments);
+                        checkKeyAndValue("propertyInt", true, "110");
                     };
 
                     [TestMethod]

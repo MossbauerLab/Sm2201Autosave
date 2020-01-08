@@ -15,7 +15,8 @@ std::string MossbauerLab::Utils::Strings::StrBaseUtils::ltrim(const char *str)
 
 std::string MossbauerLab::Utils::Strings::StrBaseUtils::rtrim(const char *str, int length)
 {
-    std::string resultStr = "abc_cba";
+    std::string resultStr;
+    const char* strEnd = str + length;
     return resultStr;
 }
 
