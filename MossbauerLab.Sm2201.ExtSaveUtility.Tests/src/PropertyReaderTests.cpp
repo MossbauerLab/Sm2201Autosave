@@ -40,7 +40,14 @@ namespace MossbauerLab
                         System::Console::WriteLine("Current working directory is: " + currentDir);
                         std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithoutComments.txt";
                         reader = new MossbauerLab::Utils::Config::PropertyReader(configWithoutComments);
-                        // todo: get each property and check ...
+                        // checking existing keys
+                        checkKeyAndValue("propertyInt", true, "110");
+                        checkKeyAndValue("propertyFloat", true, "135.567");
+                        checkKeyAndValue("propertyStr", true, "sample string (short)");
+                        checkKeyAndValue("propertyStrPathWin", true, "C:\\Program Data\\SM2201\\AutoSaves");
+                        checkKeyAndValue("propertyDateTime", true, "2020-01-14 16:01:52");
+                        // checking non-existing keys
+                        checkKeyAndValue("non-existing-prop", false, "");
                     };
 
                     [TestMethod]
@@ -57,6 +64,15 @@ namespace MossbauerLab
                     void TesttReadpropertiesThatAreNotProperties()
                     {
                     };
+                private:
+                    void checkKeyAndValue(std::string key, bool keyExists, std::string expectedValue)
+                    {
+                        bool keyCheck = reader->containsKey(key);
+                        Assert::AreEqual(keyExists, keyCheck);
+                        if (keyExists)
+                            Assert::AreEqual<System::String^>(gcnew String(expectedValue.c_str()), 
+                                                              gcnew String(reader->get(key).c_str()));
+                    }
 
                 #pragma region InternalTestContext
                 private:

@@ -34,7 +34,7 @@ void MossbauerLab::Utils::Config::PropertyReader::reload()
         {
             std::string key = line.substr(0, index);
             std::string value = line.length() - index >= 1 ? line.substr(index + 1, line.length() - (index + 1)) : "";
-            _properties.insert(std::pair<std::string, std::string>());
+            _properties.insert(std::pair<std::string, std::string>(key, value));
         }
     }
     propertyFileReader.close();
