@@ -21,10 +21,7 @@ BOOL CALLBACK EnumWindowsCallback(HWND hWnd, LPARAM lparam)
     MossbauerLab::Utils::Windows::WindowInfo info;
     info.hWnd = hWnd;
     int length = GetWindowTextLength(hWnd);
-    TCHAR* buffer = new TCHAR[length + 1];
-    GetWindowText(hWnd, buffer, length + 1);
-    // info.windowTitle = buffer;
-    delete[] buffer;
+    GetWindowText(hWnd, info.windowTitle, sizeof(info.windowTitle)/sizeof(TCHAR));
     GetWindowThreadProcessId(hWnd, &info.processId);
     // read process name:
     HANDLE procHandle = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, info.processId);
@@ -32,7 +29,7 @@ BOOL CALLBACK EnumWindowsCallback(HWND hWnd, LPARAM lparam)
     if (procHandle != INVALID_HANDLE_VALUE)
     {
         memset(info.processName, 0, sizeof(info.processName));
-        GetModuleFileName((HMODULE)procHandle, info.processName, sizeof(info.processName));
+        GetModuleFileName((HMODULE)procHandle, info.processName, sizeof(info.processName) / sizeof(TCHAR));
         PROCESSENTRY32 procEntry;
         procEntry.dwSize = sizeof(PROCESSENTRY32);
         BOOL result = Process32First(procHandle, &procEntry);

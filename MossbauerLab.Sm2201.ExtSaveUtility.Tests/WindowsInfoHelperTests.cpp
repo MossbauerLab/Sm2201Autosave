@@ -1,4 +1,4 @@
-#include "propertyReader.h"
+#include "windowsInfo.h"
 
 using namespace System;
 using namespace System::Text;
@@ -21,6 +21,9 @@ namespace MossbauerLab
                     [TestMethod]
                     void TestGetAllWindowsInfo()
                     {
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
+                        int numberOfWindows = allWindows.size();
+                        Assert::IsTrue(numberOfWindows > 0);
                     };
 
                 #pragma region InternalTestContext
