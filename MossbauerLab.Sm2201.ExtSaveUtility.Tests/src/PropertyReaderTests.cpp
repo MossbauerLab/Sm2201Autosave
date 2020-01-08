@@ -56,6 +56,10 @@ namespace MossbauerLab
                         std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithComments.txt";
                         reader = new MossbauerLab::Utils::Config::PropertyReader(configWithoutComments);
                         checkKeyAndValue("propertyInt", true, "110");
+                        checkKeyAndValue("propertyFloat", true, "135.567");
+                        checkKeyAndValue("propertyStr", true, "sample string (short)");
+                        checkKeyAndValue("propertyStrPathWin", true, "C:\\Program Data\\SM2201\\AutoSaves");
+                        checkKeyAndValue("propertyDateTime", true, "2020-01-14 16:01:52");
                     };
 
                     [TestMethod]
