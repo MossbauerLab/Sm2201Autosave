@@ -3,6 +3,7 @@
 
 #include <string>
 #include <windows.h>
+#include "schedulerConfig.h"
 
 namespace MossbauerLab
 {
@@ -22,6 +23,7 @@ namespace MossbauerLab
             private:
                 void loadConfig();
             private:
+                MossbauerLab::Sm2201::Config::SchedulerConfig* config;
                 bool _state;
                 bool _threadRunning;
                 std::string _configFile;

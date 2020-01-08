@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(ProjectDir)src\utils\config&quot;;&quot;$(ProjectDir)src\utils\strings&quot;;&quot;$(ProjectDir)src\utils\windows&quot;;&quot;$(ProjectDir)src\config&quot;;&quot;$(ProjectDir)src\saveManager&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)src&quot;;&quot;$(ProjectDir)src\utils\config&quot;;&quot;$(ProjectDir)src\utils\strings&quot;;&quot;$(ProjectDir)src\utils\windows&quot;;&quot;$(ProjectDir)src\configs&quot;;&quot;$(ProjectDir)src\saveManager&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

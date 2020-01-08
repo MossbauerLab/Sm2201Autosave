@@ -2,6 +2,7 @@
 #define SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 
 #include <string>
+#include "propertyReader.h"
 
 namespace MossbauerLab
 {
@@ -12,10 +13,11 @@ namespace MossbauerLab
             class SchedulerConfig
             {
             public:
-                SchedulerConfig()(bool useChannelOne, bool useChannelTwo,
-                                  int channelOnePeriod, int channelTwoPeriod, 
-                                  std::string& outputeDir, std::string& archiveDir);
+                SchedulerConfig(std::string schedulerConfigFile);
+                ~SchedulerConfig();
+                void reload();
             private:
+                MossbauerLab::Utils::Config::PropertyReader* reader;
                 bool _state;
                 bool _useChannelOne;
                 bool _useChannelTwo;
