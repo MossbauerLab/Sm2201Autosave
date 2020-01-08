@@ -1,6 +1,6 @@
 # This is a comment
 # integer property
-  propertyInt= 110
+  propertyInt= 110	
 # float property
 propertyFloat=135.567
 # commentedProperty = 123456789
@@ -10,4 +10,4 @@ propertyStr = sample string (short)
 # str property (path)
 propertyStrPathWin  =  C:\Program Data\SM2201\AutoSaves  
 # datetime property
-propertyDateTime= 2020-01-14 16:01:52  
+propertyDateTime= 2020-01-14 16:01:52  	

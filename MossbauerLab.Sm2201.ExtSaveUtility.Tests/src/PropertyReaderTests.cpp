@@ -53,23 +53,37 @@ namespace MossbauerLab
                     [TestMethod]
                     void TestReadPropertiesWithCommentsAndWhiteSpaces()
                     {
-                        std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithComments.txt";
-                        reader = new MossbauerLab::Utils::Config::PropertyReader(configWithoutComments);
+                        std::string configWithComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithComments.txt";
+                        reader = new MossbauerLab::Utils::Config::PropertyReader(configWithComments);
                         checkKeyAndValue("propertyInt", true, "110");
                         checkKeyAndValue("propertyFloat", true, "135.567");
                         checkKeyAndValue("propertyStr", true, "sample string (short)");
                         checkKeyAndValue("propertyStrPathWin", true, "C:\\Program Data\\SM2201\\AutoSaves");
                         checkKeyAndValue("propertyDateTime", true, "2020-01-14 16:01:52");
+                        // checking non-existing keys
+                        checkKeyAndValue("# commentedProperty", false, "");
                     };
 
                     [TestMethod]
                     void TesttReadEmptyPropertyFile()
                     {
+                        std::string configWithNoContent = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\emptyConfig.txt";
+                        reader = new MossbauerLab::Utils::Config::PropertyReader(configWithNoContent);
+                        checkKeyAndValue("propertyInt", false, "");
+                        checkKeyAndValue("propertyFloat", false, "");
+                        checkKeyAndValue("propertyStr", false, "");
                     };
 
                     [TestMethod]
-                    void TesttReadpropertiesThatAreNotProperties()
+                    void TestReadPropertiesThatAreNotProperties()
                     {
+                        std::string configWithNoContent = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\configWithNonPropertiesStr.txt";
+                        reader = new MossbauerLab::Utils::Config::PropertyReader(configWithNoContent);
+                        checkKeyAndValue("qqweer", false, "");
+                        checkKeyAndValue("12344455", false, "");
+                        checkKeyAndValue("aqw", false, "");
+                        checkKeyAndValue("999adfvv", false, "");
+                        checkKeyAndValue("ololoi-trololo", false, "");
                     };
                 private:
                     void checkKeyAndValue(std::string key, bool keyExists, std::string expectedValue)
