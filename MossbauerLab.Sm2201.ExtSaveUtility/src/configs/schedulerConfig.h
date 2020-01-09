@@ -16,6 +16,13 @@ namespace MossbauerLab
                 SchedulerConfig(const std::string& schedulerConfigFile);
                 ~SchedulerConfig();
                 void reload();
+                inline bool getState() const {return _state;}
+                inline bool isChannelOneUsing() const {return _useChannelOne;}
+                inline bool isChannelTwoUsing() const {return _useChannelTwo;}
+                inline long getChannelOnePeriod() const {return _channelOnePeriod;}
+                inline long getChannelTwoPeriod() const {return _channelTwoPeriod;}
+                inline const std::string& getOutputDir() const {return _outputDir;}
+                inline const std::string& getArchiveDir() const {return _archiveDir;}
             private:
                 MossbauerLab::Utils::Config::PropertyReader* reader;
                 bool _state;

@@ -1,4 +1,5 @@
 #include "schedulerConfig.h"
+#include "strBaseUtils.h"
 
 static std::string stateKey = "state";               // 0 - OFF, 1 - ON
 static std::string useChannelOneKey = "useChannel1"; // 0 - DO NOT SAVE ON CH1, 1 - SAVE ON CH 1
@@ -23,7 +24,15 @@ void MossbauerLab::Sm2201::Config::SchedulerConfig::reload()
 {
     reader->reload();
     std::string value = reader->get(stateKey);
-    // todo: umv: parse others ...
+    _state = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    value = reader->get(useChannelOneKey);
+    _useChannelOne = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    value = reader->get(useChannelTwoKey);
+    _useChannelTwo = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    value = reader->get(channelOnePeriodKey);
+    _channelOnePeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    value = reader->get(channelTwoPeriodKey);
+    _channelTwoPeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
     _outputDir = reader->get(outputDirKey);
     _archiveDir = reader->get(archiveDirKey);
 }
