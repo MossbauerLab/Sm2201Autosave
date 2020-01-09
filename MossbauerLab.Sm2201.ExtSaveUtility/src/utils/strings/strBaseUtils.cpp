@@ -48,9 +48,10 @@ long MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(const std::string& st
     std::string::const_reverse_iterator rit;
     for (rit = str.rbegin(); rit != str.rend(); ++rit)
     {
-        degree++;
         long multiplier = (long)pow((double)radix, (double)degree);
-        value += multiplier * getDigit(*rit);
+        char symbol = *rit;
+        value += multiplier * getDigit(symbol);
+        degree++;
     }
    
     return value;

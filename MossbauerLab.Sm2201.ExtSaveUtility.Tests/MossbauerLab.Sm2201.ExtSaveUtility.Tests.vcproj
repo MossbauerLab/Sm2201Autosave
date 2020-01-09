@@ -206,6 +206,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\StrBaseUtilsTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\windowsInfo.cpp"
 				>
 			</File>
