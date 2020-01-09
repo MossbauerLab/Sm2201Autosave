@@ -31,7 +31,7 @@ namespace MossbauerLab
                     };
 
                     [TestMethod]
-                    void TestReadPropertiesWithoutCommentsAndSpaces()
+                    void TestReadExistingScheduleConfig()
                     {
                         //System::String^ currentDir = System::IO::Path::GetFullPath(".");
                         //System::Console::WriteLine("Current working directory is: " + currentDir);
@@ -42,6 +42,16 @@ namespace MossbauerLab
                         Assert::AreEqual(true, config->isChannelTwoUsing());
                         
                     };
+
+                    [TestMethod]
+                    void TestReadTrimmedScheduleConfig()
+                    {
+                    }
+
+                    [TestMethod]
+                    void TestReadConfigOverwriteAndReload()
+                    {
+                    }
 
                 #pragma region InternalTestContext
                 private:
