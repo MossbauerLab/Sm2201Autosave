@@ -20,8 +20,8 @@ namespace MossbauerLab
                 static std::string rtrim(const char* str, int length);
                 static std::string trim(const char* str, int length);
 
-                static long parseInt(std::string str, int radix = 10);
-                static bool parseBool(std::string str);
+                static long parseLong(const std::string& str, int radix = 10);
+                static bool parseBool(const std::string& str);
             };
         }
     }

@@ -23,7 +23,7 @@ void MossbauerLab::Sm2201::Config::SchedulerConfig::reload()
 {
     reader->reload();
     std::string value = reader->get(stateKey);
-
+    // todo: umv: parse others ...
     _outputDir = reader->get(outputDirKey);
     _archiveDir = reader->get(archiveDirKey);
 }

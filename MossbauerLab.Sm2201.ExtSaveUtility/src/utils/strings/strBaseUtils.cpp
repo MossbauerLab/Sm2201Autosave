@@ -38,3 +38,13 @@ std::string MossbauerLab::Utils::Strings::StrBaseUtils::trim(const char *str, in
     resultStr = rtrim(resultStr.c_str(), resultStr.length());
     return resultStr;
 }
+
+long MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(const std::string& str, int radix)
+{
+    return -1;
+}
+
+bool MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(const std::string& str)
+{
+    return false;
+}
