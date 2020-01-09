@@ -33,9 +33,10 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
 }
 
 
-MossbauerLab::Sm2201::SaveManager::AutoSaveManager::AutoSaveManager(std::string& configFile)
+MossbauerLab::Sm2201::SaveManager::AutoSaveManager::AutoSaveManager(const std::string& configFile)
     :_configFile(configFile), _threadRunning(true), _state(false)
 {
+    _config = new MossbauerLab::Sm2201::Config::SchedulerConfig(_configFile);
     DWORD threadId;
     _timerThread = CreateThread(NULL, 0, TimerThreadFunc, this, 0, &threadId);
     
@@ -46,6 +47,7 @@ MossbauerLab::Sm2201::SaveManager::AutoSaveManager::~AutoSaveManager()
     _threadRunning = false;
     if (_timerThread != NULL)
         CloseHandle(_timerThread);
+    delete _config;
 }
 
 void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::start()

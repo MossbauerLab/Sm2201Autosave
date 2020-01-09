@@ -14,16 +14,16 @@ namespace MossbauerLab
             class AutoSaveManager
             {
             public:
-                AutoSaveManager(std::string& configFile);
+                AutoSaveManager(const std::string& configFile);
                 ~AutoSaveManager();
                 void start();
                 void stop();
-                inline bool getState() {return _state;}
-                inline bool isRunning() {return _threadRunning;}
+                inline bool getState() const {return _state;}
+                inline bool isRunning() const {return _threadRunning;}
             private:
                 void loadConfig();
             private:
-                MossbauerLab::Sm2201::Config::SchedulerConfig* config;
+                MossbauerLab::Sm2201::Config::SchedulerConfig* _config;
                 bool _state;
                 bool _threadRunning;
                 std::string _configFile;
