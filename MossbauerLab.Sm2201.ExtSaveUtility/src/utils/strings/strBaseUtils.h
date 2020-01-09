@@ -22,6 +22,8 @@ namespace MossbauerLab
 
                 static long parseLong(const std::string& str, int radix = 10);
                 static bool parseBool(const std::string& str);
+            private:
+                static int getDigit(char symbol);
             };
         }
     }

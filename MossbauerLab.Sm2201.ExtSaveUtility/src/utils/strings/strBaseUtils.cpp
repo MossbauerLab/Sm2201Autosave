@@ -1,4 +1,6 @@
 #include "strBaseUtils.h"
+#include <math.h>
+#include <string.h>
 
 std::string MossbauerLab::Utils::Strings::StrBaseUtils::ltrim(const char *str)
 {
@@ -41,10 +43,61 @@ std::string MossbauerLab::Utils::Strings::StrBaseUtils::trim(const char *str, in
 
 long MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(const std::string& str, int radix)
 {
-    return -1;
+    long value = 0;
+    int degree = 0;
+    std::string::const_reverse_iterator rit;
+    for (rit = str.rbegin(); rit != str.rend(); ++rit)
+    {
+        degree++;
+        long multiplier = (long)pow((double)radix, (double)degree);
+        value += multiplier * getDigit(*rit);
+    }
+   
+    return value;
 }
 
 bool MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(const std::string& str)
 {
+    if (strcmp(str.c_str(), "0") == 0)
+        return false;
+    else if (strcmp(str.c_str(), "1") == 0)
+        return true;
+    else if (strcmp(str.c_str(), "false") == 0)
+        return false;
+    else if (strcmp(str.c_str(), "true") == 0)
+        return true;
     return false;
+}
+
+int MossbauerLab::Utils::Strings::StrBaseUtils::getDigit(char symbol)
+{
+    int digit;
+    if (symbol >= '0' && symbol <= '9')
+    {
+        digit = (int)symbol - 0x30;
+        return digit;
+    }
+    switch(symbol)
+    {
+        case 'a':
+        case 'A':
+            return 10;
+        case 'b':
+        case 'B':
+            return 11;
+        case 'c':
+        case 'C':
+            return 12;
+        case 'd':
+        case 'D':
+            return 13;
+        case 'e':
+        case 'E':
+            return 14;
+        case 'f':
+        case 'F':
+            return 15;
+        default:
+            return 0;
+    }
 }
