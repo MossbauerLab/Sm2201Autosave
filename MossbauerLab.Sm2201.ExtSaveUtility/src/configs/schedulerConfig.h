@@ -13,7 +13,7 @@ namespace MossbauerLab
             class SchedulerConfig
             {
             public:
-                SchedulerConfig(std::string schedulerConfigFile);
+                SchedulerConfig(const std::string& schedulerConfigFile);
                 ~SchedulerConfig();
                 void reload();
             private:
