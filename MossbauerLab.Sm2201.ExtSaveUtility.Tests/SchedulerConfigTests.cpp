@@ -40,6 +40,8 @@ namespace MossbauerLab
                         Assert::AreEqual(true, config->isChannelTwoUsing());
                         Assert::AreEqual(3600, config->getChannelOnePeriod());
                         Assert::AreEqual(7200, config->getChannelTwoPeriod());
+                        Assert::AreEqual("C:\\SM2201\\Specs", gcnew String(config->getOutputDir().c_str()));
+                        Assert::AreEqual("C:\\SavedSpecs", gcnew String(config->getArchiveDir().c_str()));
                     };
 
                     [TestMethod]

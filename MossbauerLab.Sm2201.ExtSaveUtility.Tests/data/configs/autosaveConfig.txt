@@ -20,6 +20,6 @@ channel1Period = 3600
 # channel2Period - период автосохранени¤ спектров по каналу 2 в СЕК , например, дл¤ сохранения спектров с периодом 1 час, channel2Period = 3600
 channel2Period = 7200
 # outputDir - директория (АБСОЛЮТНЫЙ ПУТЬ), в которую, SM2201 сохран¤ет спектры, например, outputDir=C:\\SM2201\\Specs
-outputDir=C:\\SM2201\\Specs
+outputDir=C:\SM2201\Specs
 # archiveDir - директория (АБСОЛЮТНЫЙ ПУТЬ), в которую спектры будут копироватьс¤ из outputDir с уникальным именем, содержащим timestamp,
-archiveDir=C:\\SavedSpecs
+archiveDir=C:\SavedSpecs
