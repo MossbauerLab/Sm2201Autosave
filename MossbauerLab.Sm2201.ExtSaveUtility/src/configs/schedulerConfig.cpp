@@ -30,9 +30,9 @@ void MossbauerLab::Sm2201::Config::SchedulerConfig::reload()
     value = reader->get(useChannelTwoKey);
     _useChannelTwo = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
     value = reader->get(channelOnePeriodKey);
-    _channelOnePeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    _channelOnePeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(value, 10);
     value = reader->get(channelTwoPeriodKey);
-    _channelTwoPeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool(value);
+    _channelTwoPeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(value, 10);
     _outputDir = reader->get(outputDirKey);
     _archiveDir = reader->get(archiveDirKey);
 }

@@ -33,14 +33,13 @@ namespace MossbauerLab
                     [TestMethod]
                     void TestReadExistingScheduleConfig()
                     {
-                        //System::String^ currentDir = System::IO::Path::GetFullPath(".");
-                        //System::Console::WriteLine("Current working directory is: " + currentDir);
-                        std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\configs\\autosaveConfig.txt";
+                        std::string configWithoutComments = "..\\..\\..\\MossbauerLab.Sm2201.ExtSaveUtility.Tests\\data\\configs\\autosaveConfig.txt";
                         config = new MossbauerLab::Sm2201::Config::SchedulerConfig(configWithoutComments);
                         Assert::AreEqual(true, config->getState());
                         Assert::AreEqual(true, config->isChannelOneUsing());
                         Assert::AreEqual(true, config->isChannelTwoUsing());
-                        
+                        Assert::AreEqual(3600, config->getChannelOnePeriod());
+                        Assert::AreEqual(7200, config->getChannelTwoPeriod());
                     };
 
                     [TestMethod]
