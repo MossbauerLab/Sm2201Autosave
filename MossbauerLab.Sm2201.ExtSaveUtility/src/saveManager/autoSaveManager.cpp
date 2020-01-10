@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 
+#define CHECK_INTERVAL 1000
+
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
 { 
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager* manager = (MossbauerLab::Sm2201::SaveManager::AutoSaveManager*)lpParam;
@@ -13,18 +15,55 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
         return -1;
     }
 
-    int elapsedTime = 0;
+    long channellElapsedTime = 0;
+    long channel2ElapsedTime = 0;
+
     while(manager->isRunning())
     {
-        // check after 1 sec, unfortunately we don't have here func like CreateWaitableTimer
+        MossbauerLab::Sm2201::Config::SchedulerConfig* config = manager->getConfig();
         if(manager->getState())
         {
-            // get time 
-            // elapsed += portion ...
+            if (config->getState())
+            {
+                if (config->isChannelOneUsing())
+                {
+                    if (channellElapsedTime >= config->getChannelOnePeriod() * 1000)
+                    {
+                        // todo: umv: impl save for channel 1
+                    }
+                    else
+                    {
+                        Sleep(CHECK_INTERVAL);
+                        channellElapsedTime += CHECK_INTERVAL;
+                    }
+                }
+                
+                if (config->isChannelTwoUsing())
+                {
+                    if (channellElapsedTime >= config->getChannelTwoPeriod() * 1000)
+                    {
+                        // todo: umv: impl save for channel 1
+                    }
+                    else
+                    {
+                        Sleep(CHECK_INTERVAL);
+                        channellElapsedTime += CHECK_INTERVAL;
+                    }
+                }
+            }
+            else
+            {
+                channellElapsedTime = 0;
+                channel2ElapsedTime = 0;
+                Sleep(CHECK_INTERVAL);
+            }
+            // todo: umv reload config
         }
         else
         {
-            Sleep(1000);
+            channellElapsedTime = 0;
+            channel2ElapsedTime = 0;
+            Sleep(CHECK_INTERVAL);
         }
         
     }
