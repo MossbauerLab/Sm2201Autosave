@@ -16,6 +16,14 @@ std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windo
     return windowInfoList;
 }
 
+std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windows::WindowInfoHelper::find (const std::vector<WindowInfo>& windows, 
+                                                                                                            const std::string& processName)
+{
+    std::vector<MossbauerLab::Utils::Windows::WindowInfo> matchedWindowsInfo;
+    // todo: umv: implement
+    return matchedWindowsInfo;
+}
+
 BOOL CALLBACK EnumWindowsCallback(HWND hWnd, LPARAM lparam)
 {
     MossbauerLab::Utils::Windows::WindowInfo info;

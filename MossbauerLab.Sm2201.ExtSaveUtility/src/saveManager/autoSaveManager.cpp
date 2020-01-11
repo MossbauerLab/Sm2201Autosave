@@ -70,7 +70,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
             elapsedTime += CHECK_INTERVAL;
         }
         
-        if (elapsedTime > 0 && elapsedTime %= 20 * CHECK_INTERVAL)
+        if (elapsedTime > 0 && elapsedTime % (20 * CHECK_INTERVAL) == 0)
         {
             manager->reloadConfig();
             elapsedTime = 0;

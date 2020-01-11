@@ -20,7 +20,7 @@ namespace MossbauerLab
                 void stop();
                 inline bool getState() const {return _state;}
                 inline bool isRunning() const {return _threadRunning;}
-                inline const MossbauerLab::Sm2201::Config::SchedulerConfig* getConfig() const {return _config;}
+                inline MossbauerLab::Sm2201::Config::SchedulerConfig* getConfig() const {return _config;}
                 void reloadConfig();
             private:
                 MossbauerLab::Sm2201::Config::SchedulerConfig* _config;
