@@ -17,6 +17,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
 
     long channellElapsedTime = 0;
     long channel2ElapsedTime = 0;
+    long elapsedTime = 0;
 
     while(manager->isRunning())
     {
@@ -35,6 +36,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                     {
                         Sleep(CHECK_INTERVAL);
                         channellElapsedTime += CHECK_INTERVAL;
+                        elapsedTime += CHECK_INTERVAL;
                     }
                 }
                 
@@ -48,6 +50,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                     {
                         Sleep(CHECK_INTERVAL);
                         channellElapsedTime += CHECK_INTERVAL;
+                        elapsedTime += CHECK_INTERVAL;
                     }
                 }
             }
@@ -55,17 +58,23 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
             {
                 channellElapsedTime = 0;
                 channel2ElapsedTime = 0;
+                elapsedTime += CHECK_INTERVAL;
                 Sleep(CHECK_INTERVAL);
             }
-            // todo: umv reload config
         }
         else
         {
             channellElapsedTime = 0;
             channel2ElapsedTime = 0;
             Sleep(CHECK_INTERVAL);
+            elapsedTime += CHECK_INTERVAL;
         }
         
+        if (elapsedTime > 0 && elapsedTime %= 20 * CHECK_INTERVAL)
+        {
+            manager->reloadConfig();
+            elapsedTime = 0;
+        }
     }
 
     return 0; 
@@ -101,8 +110,8 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::stop()
     _state = false;
 }
 
-void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::loadConfig()
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::reloadConfig()
 {
-    
+    _config->reload();
 }
 
