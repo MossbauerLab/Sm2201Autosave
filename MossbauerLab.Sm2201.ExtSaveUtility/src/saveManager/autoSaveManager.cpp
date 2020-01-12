@@ -11,7 +11,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager* manager = (MossbauerLab::Sm2201::SaveManager::AutoSaveManager*)lpParam;
     if (manager == NULL)
     {
-        std::cerr << "Thread function argument is NULL!" << std::endl;
+        std::cerr << "===== >>> Thread function argument is NULL! <<< =====" << std::endl;
         return -1;
     }
 
@@ -31,6 +31,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                     if (channellElapsedTime >= config->getChannelOnePeriod() * 1000)
                     {
                         // todo: umv: impl save for channel 1
+                        std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
+                        channellElapsedTime = 0;
                     }
                     else
                     {
@@ -42,14 +44,16 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                 
                 if (config->isChannelTwoUsing())
                 {
-                    if (channellElapsedTime >= config->getChannelTwoPeriod() * 1000)
+                    if (channel2ElapsedTime >= config->getChannelTwoPeriod() * 1000)
                     {
                         // todo: umv: impl save for channel 1
+                        std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
+                        channel2ElapsedTime = 0;
                     }
                     else
                     {
                         Sleep(CHECK_INTERVAL);
-                        channellElapsedTime += CHECK_INTERVAL;
+                        channel2ElapsedTime += CHECK_INTERVAL;
                         elapsedTime += CHECK_INTERVAL;
                     }
                 }
@@ -72,6 +76,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
         
         if (elapsedTime > 0 && elapsedTime % (20 * CHECK_INTERVAL) == 0)
         {
+            std::cout << "===== >>> Autosave manager config was reloaded. <<< =====" << std::endl;
             manager->reloadConfig();
             elapsedTime = 0;
         }
