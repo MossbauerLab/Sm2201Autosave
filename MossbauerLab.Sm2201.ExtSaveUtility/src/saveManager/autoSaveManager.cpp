@@ -39,18 +39,18 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // todo: umv: 1. Send Key Sequemce
+                            // todo: umv: 1. Send Key Sequence
                             // todo: umv: 2. Get last saved file from outputDir
                             // todo: umv: 3. Copy to archiveDir
                             std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows > 1)
                         {
-                        
+                            std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows == 0)
                         {
-                        
+                            std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channellElapsedTime = 0;
@@ -72,18 +72,18 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // todo: umv: 1. Send Key Sequemce
+                            // todo: umv: 1. Send Key Sequence
                             // todo: umv: 2. Get last saved file from outputDir
                             // todo: umv: 3. Copy to archiveDir
                             std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows > 1)
                         {
-                        
+                            std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows == 0)
                         {
-                        
+                            std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channel2ElapsedTime = 0;
