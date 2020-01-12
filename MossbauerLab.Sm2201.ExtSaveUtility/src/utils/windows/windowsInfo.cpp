@@ -17,7 +17,8 @@ std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windo
 }
 
 std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windows::WindowInfoHelper::find (const std::vector<WindowInfo>& windows, 
-                                                                                                            const std::string& processName)
+                                                                                                            const std::string& processName, 
+                                                                                                            const std::string& title)
 {
     std::vector<MossbauerLab::Utils::Windows::WindowInfo> matchedWindowsInfo;
     // todo: umv: implement
