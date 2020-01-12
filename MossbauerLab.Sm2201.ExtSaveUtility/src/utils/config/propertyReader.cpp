@@ -26,6 +26,7 @@ const std::string& MossbauerLab::Utils::Config::PropertyReader::get(const std::s
 
 void MossbauerLab::Utils::Config::PropertyReader::reload()
 {
+    _properties.erase(_properties.begin(), _properties.end());
     std::ifstream propertyFileReader;
     propertyFileReader.open(_fileName.c_str(), std::ifstream::in);
     std::string line;
