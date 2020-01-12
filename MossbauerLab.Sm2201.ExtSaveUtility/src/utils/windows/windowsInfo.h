@@ -24,9 +24,11 @@ namespace MossbauerLab
             {
             public:
                 static std::vector<WindowInfo> get();
-                static std::vector<WindowInfo> find (const std::vector<WindowInfo>& windows, 
-                                                     const std::string& processName, 
-                                                     const std::string& title);
+                static std::vector<WindowInfo> find (const std::vector<WindowInfo>& windows,
+                                                     const TCHAR* processName, 
+                                                     const TCHAR* windowTitle);
+                                                     //const std::string& processName, 
+                                                     //const std::string& title);
             };
         }
     }

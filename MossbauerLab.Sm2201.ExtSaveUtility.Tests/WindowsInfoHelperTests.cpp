@@ -1,4 +1,5 @@
 #include "windowsInfo.h"
+#include <tchar.h>
 
 using namespace System;
 using namespace System::Text;
@@ -25,6 +26,15 @@ namespace MossbauerLab
                         int numberOfWindows = allWindows.size();
                         Assert::IsTrue(numberOfWindows > 0);
                     };
+
+                    [TestMethod]
+                    void TestGetWindowInfoByTitleAndProcess()
+                    {
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, _T("devenv.exe"), _T("&Build"));
+                        int numberOfWindows = selectedWindows.size();
+                        Assert::IsTrue(numberOfWindows > 0);
+                    }
 
                 #pragma region InternalTestContext
                 private:

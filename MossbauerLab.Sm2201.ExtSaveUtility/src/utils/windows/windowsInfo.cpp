@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include <tlhelp32.h>
+#include <string.h>
 #include <iostream>
 
 // Windows 98 and Windows 2000 WINVER=0x0500
@@ -16,12 +17,22 @@ std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windo
     return windowInfoList;
 }
 
-std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windows::WindowInfoHelper::find (const std::vector<WindowInfo>& windows, 
-                                                                                                            const std::string& processName, 
-                                                                                                            const std::string& title)
+std::vector<MossbauerLab::Utils::Windows::WindowInfo> MossbauerLab::Utils::Windows::WindowInfoHelper::find (const std::vector<WindowInfo>& windows,
+                                                                                                            const TCHAR* processName, 
+                                                                                                            const TCHAR* windowTitle)
+                                                                                                            //const std::string& processName, 
+                                                                                                            //const std::string& title)
 {
     std::vector<MossbauerLab::Utils::Windows::WindowInfo> matchedWindowsInfo;
-    // todo: umv: implement
+    std::vector<MossbauerLab::Utils::Windows::WindowInfo>::const_iterator cit;
+    for(cit = windows.begin(); cit != windows.end(); cit++)
+    {
+        if(_tcscmp((*cit).windowTitle, windowTitle) == 0 &&
+           _tcscmp((*cit).processName, processName) == 0)
+        {
+            matchedWindowsInfo.push_back(*(cit));
+        }
+    }
     return matchedWindowsInfo;
 }
 
