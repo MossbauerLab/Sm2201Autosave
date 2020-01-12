@@ -1,10 +1,14 @@
 #include "autoSaveManager.h"
+#include "windowsInfo.h"
 #include <winbase.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <tchar.h>
 
 #define CHECK_INTERVAL 1000
+#define SM2201_UTILITY_TITLE _T("MC")
+#define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")
 
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
 { 
@@ -30,8 +34,25 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                 {
                     if (channellElapsedTime >= config->getChannelOnePeriod() * 1000)
                     {
-                        // todo: umv: impl save for channel 1
-                        std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, MSDOS_PROC_NAME, SM2201_UTILITY_TITLE);
+                        int numberOfWindows = selectedWindows.size();
+                        if(numberOfWindows == 1)
+                        {
+                            // todo: umv: 1. Send Key Sequemce
+                            // todo: umv: 2. Get last saved file from outputDir
+                            // todo: umv: 3. Copy to archiveDir
+                            std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
+                        }
+                        else if (numberOfWindows > 1)
+                        {
+                        
+                        }
+                        else if (numberOfWindows == 0)
+                        {
+                        
+                        }
+
                         channellElapsedTime = 0;
                     }
                     else
@@ -46,8 +67,25 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                 {
                     if (channel2ElapsedTime >= config->getChannelTwoPeriod() * 1000)
                     {
-                        // todo: umv: impl save for channel 1
-                        std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, MSDOS_PROC_NAME, SM2201_UTILITY_TITLE);
+                        int numberOfWindows = selectedWindows.size();
+                        if(numberOfWindows == 1)
+                        {
+                            // todo: umv: 1. Send Key Sequemce
+                            // todo: umv: 2. Get last saved file from outputDir
+                            // todo: umv: 3. Copy to archiveDir
+                            std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
+                        }
+                        else if (numberOfWindows > 1)
+                        {
+                        
+                        }
+                        else if (numberOfWindows == 0)
+                        {
+                        
+                        }
+
                         channel2ElapsedTime = 0;
                     }
                     else
