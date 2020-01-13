@@ -7,6 +7,7 @@
 #include <tchar.h>
 
 #define CHECK_INTERVAL 1000
+#define KEY_SEND_INTERVAL 1000
 #define SM2201_UTILITY_TITLE _T("MC")
 #define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")
 
@@ -39,7 +40,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // todo: umv: 1. Send Key Sequence
+                            // Send Key Sequence
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1);
                             // todo: umv: 2. Get last saved file from outputDir
                             // todo: umv: 3. Copy to archiveDir
                             std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
@@ -72,7 +74,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // todo: umv: 1. Send Key Sequence
+                            // Send Key Sequence
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2);
                             // todo: umv: 2. Get last saved file from outputDir
                             // todo: umv: 3. Copy to archiveDir
                             std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
@@ -158,3 +161,17 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::reloadConfig()
     _config->reload();
 }
 
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND window, int channel)
+{
+    // 1. Channel select
+    if(channel == 1)
+        SendMessage(window, WM_CHAR, (WPARAM)VK_LEFT, (LPARAM)0);
+    else SendMessage(window, WM_CHAR, (WPARAM)VK_RIGHT, (LPARAM)0);
+    // 2. todo: Refresh
+    // 3. Write
+    SendMessage(window, WM_CHAR, (WPARAM)0x57, (LPARAM)0);
+    // 4. Enter - submit file name
+    SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
+    // 5. Enter - overwrite file
+    SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
+}

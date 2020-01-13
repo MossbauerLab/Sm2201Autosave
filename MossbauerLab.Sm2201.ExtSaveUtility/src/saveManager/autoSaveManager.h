@@ -22,6 +22,7 @@ namespace MossbauerLab
                 inline bool isRunning() const {return _threadRunning;}
                 inline MossbauerLab::Sm2201::Config::SchedulerConfig* getConfig() const {return _config;}
                 void reloadConfig();
+                void sendKeysSequence(HWND window, int channel);
             private:
                 MossbauerLab::Sm2201::Config::SchedulerConfig* _config;
                 bool _state;
