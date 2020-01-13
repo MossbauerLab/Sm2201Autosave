@@ -176,6 +176,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\utils\windows\fileInfo.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
@@ -203,6 +207,10 @@
 			>
 			<File
 				RelativePath=".\src\saveManager\autoSaveManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\utils\windows\fileInfo.h"
 				>
 			</File>
 			<File
