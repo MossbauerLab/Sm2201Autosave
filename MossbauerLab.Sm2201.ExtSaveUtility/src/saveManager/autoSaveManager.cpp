@@ -167,11 +167,23 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     if(channel == 1)
         SendMessage(window, WM_CHAR, (WPARAM)VK_LEFT, (LPARAM)0);
     else SendMessage(window, WM_CHAR, (WPARAM)VK_RIGHT, (LPARAM)0);
-    // 2. todo: Refresh
-    // 3. Write
-    SendMessage(window, WM_CHAR, (WPARAM)0x57, (LPARAM)0);
-    // 4. Enter - submit file name
+    Sleep (200);
+    // 2. Update = Read from device
+    SendMessage(window, WM_CHAR, (WPARAM)0x43, (LPARAM)0);       // C, continue
+    Sleep (200);
+    // 3. Enter scalling coefficient
     SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
-    // 5. Enter - overwrite file
+    Sleep (200);
+    // 4. Stop undate continiously
     SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
+    Sleep (200);
+    // 5. Write
+    SendMessage(window, WM_CHAR, (WPARAM)0x57, (LPARAM)0);       // W, write
+    Sleep (200);
+    // 6. Enter - submit file name
+    SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
+    Sleep (200);
+    // 7. Enter - overwrite file
+    SendMessage(window, WM_CHAR, (WPARAM)VK_RETURN, (LPARAM)0);
+    Sleep (200);
 }
