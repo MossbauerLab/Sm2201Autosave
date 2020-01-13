@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 {
     std::cout << " ===== >>> Spectrum saver is running <<< =====" << std::endl;
     std::string condigFilePath = ".\\autosaveConfig.txt";
-    std::cout << " ===== >>> Type: start or stop or exit <<< =====" << std::endl;
+    std::cout << " ===== >>> Type: start, stop or exit <<< =====" << std::endl;
     std::string userInput;
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager manager(condigFilePath);
     while(1)
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
         {
             std::cout << " ===== >>> Unknown command <<< =====" << std::endl;
         }
-        std::cout << " ===== >>> Type: start or stop or exit <<< =====" << std::endl;
+        std::cout << " ===== >>> Type: start, stop or exit <<< =====" << std::endl;
     }
     std::cout << " ===== >>> Spectrum saver is stopping <<< =====" << std::endl;
     return 0;
