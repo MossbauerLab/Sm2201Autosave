@@ -10,6 +10,7 @@
 SM2201 Горячие клавиши:
 
 W - запись
+С - продолжение
 Left Arrow - на канал 1
 Right Arrow - на канал 2
 
@@ -28,7 +29,7 @@ SendMessage(hWnd, WM_CHAR, 0x0D, 0); - VK_RETURN
 
 1. Выбор канала - Left Arrow
 SendMessage(hWnd, WM_CHAR, 0x27, 0); - VK_RIGHT
-2. Продолжение - ???
+2. Продолжение - C, Enter, Enter
 SendMessage(hWnd, WM_CHAR, ???, 0);
 3. Запись - W
 SendMessage(hWnd, WM_CHAR, 0x57, 0); - Ord('w')

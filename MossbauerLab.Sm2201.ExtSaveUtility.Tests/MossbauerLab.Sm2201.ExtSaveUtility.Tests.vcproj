@@ -194,6 +194,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\fileInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\FileInfoHelperTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config\propertyReader.cpp"
 				>
 			</File>
