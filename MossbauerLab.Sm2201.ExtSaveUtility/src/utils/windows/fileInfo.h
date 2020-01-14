@@ -14,7 +14,7 @@ namespace MossbauerLab
             class FileInfoHelper
             {
             public:
-                static void getLastChangedFile(TCHAR* directory, TCHAR* fileSearchPattern);
+                static void getLastChangedFile(TCHAR* searchPattern);
             };
         }
     }
