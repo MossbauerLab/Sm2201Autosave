@@ -7,6 +7,7 @@ MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TC
     {
         int length = _tcslen(filePath);
         _filePath = new TCHAR[length];
+        _tcscpy(_filePath, filePath);
     }
 }
 
@@ -18,7 +19,7 @@ MossbauerLab::Utils::Windows::FileSearchResult::~FileSearchResult()
     }
 }
 
-MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(TCHAR* directory, TCHAR* searchPattern)
+MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(const TCHAR* directory, const TCHAR* searchPattern)
 {
     TCHAR fullPath[MAX_PATH];
     _tcscpy(fullPath, directory);
@@ -54,5 +55,9 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
             latestDateTime = checkingDateTime;
         }
     }
-    return new MossbauerLab::Utils::Windows::FileSearchResult(true, NULL);
+
+    TCHAR resultFile[MAX_PATH];
+    _tcscpy(resultFile, directory);
+    _tcscat(resultFile, latestFileData.cFileName);
+    return new MossbauerLab::Utils::Windows::FileSearchResult(true, resultFile);
 }

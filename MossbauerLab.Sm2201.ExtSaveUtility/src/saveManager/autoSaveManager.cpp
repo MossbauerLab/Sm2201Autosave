@@ -1,5 +1,6 @@
 #include "autoSaveManager.h"
 #include "windowsInfo.h"
+#include "fileInfo.h"
 #include <winbase.h>
 #include <iostream>
 #include <fstream>
@@ -24,6 +25,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
     long channel2ElapsedTime = 0;
     long elapsedTime = 0;
 
+    TCHAR outputDir[MAX_PATH];
+
     while(manager->isRunning())
     {
         MossbauerLab::Sm2201::Config::SchedulerConfig* config = manager->getConfig();
@@ -40,10 +43,16 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // Send Key Sequence
+                            // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 1);
-                            // todo: umv: 2. Get last saved file from outputDir
-                            // todo: umv: 3. Copy to archiveDir
+                            // 2. Get last saved file from outputDir
+                            swprintf(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
+                            MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
+                            if (searchResult->getResult())
+                            {
+                                // 3. Copy to archiveDir
+                            }
+                            delete searchResult;
                             std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows > 1)
@@ -74,10 +83,16 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         int numberOfWindows = selectedWindows.size();
                         if(numberOfWindows == 1)
                         {
-                            // Send Key Sequence
+                            // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 2);
-                            // todo: umv: 2. Get last saved file from outputDir
-                            // todo: umv: 3. Copy to archiveDir
+                            // 2. Get last saved file from outputDir
+                            swprintf(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
+                            MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
+                            if (searchResult->getResult())
+                            {
+                                // 3. Copy to archiveDir
+                            }
+                            delete searchResult;
                             std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows > 1)

@@ -24,7 +24,8 @@ namespace MossbauerLab
                     {
                         TCHAR outputDir[MAX_PATH] = _T("..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\sm2201");
                         TCHAR searchPattern[MAX_PATH] = _T("\\*.spc");
-                        MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, searchPattern);
+                        MossbauerLab::Utils::Windows::FileSearchResult* result = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, searchPattern);
+                        Assert::AreEqual(true, result->getResult());
                     };
 
                 #pragma region InternalTestContext
