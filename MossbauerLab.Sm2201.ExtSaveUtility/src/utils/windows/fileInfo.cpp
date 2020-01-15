@@ -1,6 +1,24 @@
 #include "fileInfo.h"
 
-void MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(TCHAR* directory, TCHAR* searchPattern)
+MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TCHAR* filePath)
+    :_result(result)
+{
+    if (result && filePath != NULL)
+    {
+        int length = _tcslen(filePath);
+        _filePath = new TCHAR[length];
+    }
+}
+
+MossbauerLab::Utils::Windows::FileSearchResult::~FileSearchResult()
+{
+    if (_filePath != NULL)
+    {
+        delete[] _filePath;
+    }
+}
+
+MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(TCHAR* directory, TCHAR* searchPattern)
 {
     TCHAR fullPath[MAX_PATH];
     _tcscpy(fullPath, directory);
@@ -11,12 +29,13 @@ void MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(TCHAR* dir
     hFind = FindFirstFile(fullPath, &searchData);
     if (hFind == INVALID_HANDLE_VALUE)
     {
-        // todo: umv: return empty result
+        return new MossbauerLab::Utils::Windows::FileSearchResult(false, NULL);
     }
 
     do
     {
-        files.push_back(searchData);
+        if(!(searchData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+            files.push_back(searchData);
     }
     while (FindNextFile(hFind, &searchData) != NULL);
     FindClose(hFind);
@@ -35,5 +54,5 @@ void MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(TCHAR* dir
             latestDateTime = checkingDateTime;
         }
     }
-    int a = 1;
+    return new MossbauerLab::Utils::Windows::FileSearchResult(true, NULL);
 }

@@ -11,11 +11,25 @@ namespace MossbauerLab
     {
         namespace Windows
         {
+            class FileSearchResult;
+
             class FileInfoHelper
             {
             public:
                 // directory should not ends with back clash, i.e. C:\\tmp
-                static void getLastChangedFile(TCHAR* directory, TCHAR* searchPattern);
+                static FileSearchResult* getLastChangedFile(TCHAR* directory, TCHAR* searchPattern);
+            };
+
+            class FileSearchResult
+            {
+            public:
+                FileSearchResult(bool result, TCHAR* filePath);
+                ~FileSearchResult();
+                inline bool getResult() const {return _result;}
+                inline const TCHAR* getFilePath() const {return const_cast<const TCHAR*>(_filePath);}
+            private:
+                bool _result;
+                TCHAR* _filePath;
             };
         }
     }
