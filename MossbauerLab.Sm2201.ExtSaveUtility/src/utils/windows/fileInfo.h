@@ -14,7 +14,8 @@ namespace MossbauerLab
             class FileInfoHelper
             {
             public:
-                static void getLastChangedFile(TCHAR* searchPattern);
+                // directory should not ends with back clash, i.e. C:\\tmp
+                static void getLastChangedFile(TCHAR* directory, TCHAR* searchPattern);
             };
         }
     }

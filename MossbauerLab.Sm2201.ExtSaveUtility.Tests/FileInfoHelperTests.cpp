@@ -22,8 +22,9 @@ namespace MossbauerLab
                     [TestMethod]
                     void TestGetLastSavedFile()
                     {
-                        TCHAR* outputDirSpecsPattern = _T("..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\sm2201\\*.SPC");
-                        MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDirSpecsPattern);
+                        TCHAR outputDir[MAX_PATH] = _T("..\\..\\..\\MossbauerLab.Sm2201.ExtSaveutility.Tests\\data\\sm2201");
+                        TCHAR searchPattern[MAX_PATH] = _T("\\*.spc");
+                        MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, searchPattern);
                     };
 
                 #pragma region InternalTestContext
