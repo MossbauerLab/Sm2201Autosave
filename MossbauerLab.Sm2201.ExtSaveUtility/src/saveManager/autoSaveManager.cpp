@@ -26,6 +26,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
     long elapsedTime = 0;
 
     TCHAR outputDir[MAX_PATH];
+    TCHAR fullOutputName [MAX_PATH];
 
     while(manager->isRunning())
     {
@@ -46,11 +47,19 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 1);
                             // 2. Get last saved file from outputDir
-                            swprintf(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
+                            _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
                             MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
                             if (searchResult->getResult())
                             {
                                 // 3. Copy to archiveDir
+                                // 3.1 Getting timestamped filename
+                                TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
+                                // 3.2 Combine with autosaveDir
+                                memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
+                                _stprintf(fullOutputName, _T("%s%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                // 3.3 Save
+                                CopyFile(searchResult->getFilePath(), fullOutputName, false);
+                                delete[] timestampedFileName;
                             }
                             delete searchResult;
                             std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
@@ -86,11 +95,20 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 2);
                             // 2. Get last saved file from outputDir
-                            swprintf(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
+                            _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
+                                        config->getOutputDir().c_str());
                             MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
                             if (searchResult->getResult())
                             {
                                 // 3. Copy to archiveDir
+                                // 3.1 Getting timestamped filename
+                                TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
+                                // 3.2 Combine with autosaveDir
+                                memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
+                                _stprintf(fullOutputName, _T("%s%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                // 3.3 Save
+                                CopyFile(searchResult->getFilePath(), fullOutputName, false);
+                                delete[] timestampedFileName;
                             }
                             delete searchResult;
                             std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
