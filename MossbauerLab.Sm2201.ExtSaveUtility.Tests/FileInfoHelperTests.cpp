@@ -26,7 +26,26 @@ namespace MossbauerLab
                         TCHAR searchPattern[MAX_PATH] = _T("\\*.spc");
                         MossbauerLab::Utils::Windows::FileSearchResult* result = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, searchPattern);
                         Assert::AreEqual(true, result->getResult());
+                        Assert::AreEqual(gcnew String(_T("spec2.spc")), gcnew String(result->getFileName()));
                     };
+
+                    [TestMethod]
+                    void TestGetTimestampedFileName()
+                    {
+                        TCHAR* fileName = _T("some_spec.spc");
+                        TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(fileName);
+                        Assert::IsNotNull(gcnew String(timestampedFileName));
+                        Assert::IsTrue(_tcslen(timestampedFileName) > _tcslen(fileName));
+                    }
+
+                    [TestMethod]
+                    void TestGetTimestampedFileNameForFullPath()
+                    {
+                        TCHAR* fileName = _T("C:\\autosave\\some_spec.spc");
+                        TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(fileName);
+                        Assert::IsNotNull(gcnew String(timestampedFileName));
+                        Assert::IsTrue(_tcslen(timestampedFileName) > _tcslen(fileName));
+                    }
 
                 #pragma region InternalTestContext
                 private:
