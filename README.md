@@ -18,8 +18,8 @@ Right Arrow - на канал 2
 
 1. Выбор канала - Left Arrow
 SendMessage(hWnd, WM_CHAR, 0x25, 0); - VK_LEFT
-2. Продолжение - ???
-SendMessage(hWnd, WM_CHAR, ???, 0);
+2. Продолжение - Продолжение - C, Enter, Enter
+SendMessage(hWnd, WM_CHAR, 0x43, 0);
 3. Запись - W
 SendMessage(hWnd, WM_CHAR, 0x57, 0); - Ord('w')
 4. Перезапись файла - Enter
@@ -30,7 +30,7 @@ SendMessage(hWnd, WM_CHAR, 0x0D, 0); - VK_RETURN
 1. Выбор канала - Left Arrow
 SendMessage(hWnd, WM_CHAR, 0x27, 0); - VK_RIGHT
 2. Продолжение - C, Enter, Enter
-SendMessage(hWnd, WM_CHAR, ???, 0);
+SendMessage(hWnd, WM_CHAR, 0x43, 0);
 3. Запись - W
 SendMessage(hWnd, WM_CHAR, 0x57, 0); - Ord('w')
 4. Перезапись файла - Enter
