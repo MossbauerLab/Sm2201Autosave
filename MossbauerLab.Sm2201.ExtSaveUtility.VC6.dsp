@@ -92,20 +92,31 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\Sm2201SaveManager.cpp
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\main.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\Sm2201SpectrumSaver.cpp
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\autoSaveManager.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\StdAfx.cpp
-# ADD CPP /Yc"stdafx.h"
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\configs\schedulerConfig.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=.\WindowsUtils.cpp
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config\propertyReader.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings\strBaseUtils.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\fileInfo.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\windowsInfo.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -113,19 +124,27 @@ SOURCE=.\WindowsUtils.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=.\Sm2201SaveManager.h
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\autoSaveManager.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\Sm2201SaveScheduleConfig.h
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\configs\schedulerConfig.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\StdAfx.h
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config\propertyReader.h
 # End Source File
 # Begin Source File
 
-SOURCE=.\WindowsUtils.h
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings\strBaseUtils.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\fileInfo.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\windowsInfo.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
@@ -134,7 +153,7 @@ SOURCE=.\WindowsUtils.h
 # End Group
 # Begin Source File
 
-SOURCE=.\ReadMe.txt
+SOURCE=.\ReadMe.md
 # End Source File
 # End Target
 # End Project
