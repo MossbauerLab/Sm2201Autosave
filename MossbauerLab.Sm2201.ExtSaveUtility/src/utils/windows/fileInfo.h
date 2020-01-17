@@ -1,5 +1,8 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_FILE_INFO_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_FILE_INFO_H
+
+#pragma warning(disable:4786)
+
 #include <vector>
 #include <string>
 #include <windows.h>

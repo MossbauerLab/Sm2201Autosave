@@ -12,6 +12,10 @@
 #define SM2201_UTILITY_TITLE _T("MC")
 #define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")
 
+//#if WINVER < 0x0600
+//    #define _stprintf_s sprintf
+//#endif
+
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
 { 
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager* manager = (MossbauerLab::Sm2201::SaveManager::AutoSaveManager*)lpParam;
@@ -47,7 +51,11 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 1);
                             // 2. Get last saved file from outputDir
-                            _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), L"%hs", config->getOutputDir().c_str());
+                            #if WINVER > 0x0500
+                                _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), config->getOutputDir().c_str());
+                            #else
+                                sprintf(outputDir, _T("%hs"), config->getOutputDir().c_str());
+                            #endif
                             MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
                             if (searchResult->getResult())
                             {
@@ -95,8 +103,12 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 2);
                             // 2. Get last saved file from outputDir
-                            _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
-                                        config->getOutputDir().c_str());
+                            #if WINVER > 0x0500
+                                _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
+                                            config->getOutputDir().c_str());
+                            #else
+                                sprintf(outputDir, _T("%hs"), config->getOutputDir().c_str());
+                            #endif
                             MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
                             if (searchResult->getResult())
                             {

@@ -1,11 +1,14 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_STRING_BASE_UTILS_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_STRING_BASE_UTILS_H
 
+#pragma warning(disable:4786)
+
 #include <string>
 
 /* Utils for work with strings in application that are running on Windows 98
  * Because Win98 C++ stdlib don't have utilities for i.e. Trim
  */
+
 
 namespace MossbauerLab
 {

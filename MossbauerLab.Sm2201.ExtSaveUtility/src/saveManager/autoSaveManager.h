@@ -1,6 +1,8 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_SAVE_MANAGER_AUTO_SAVE_MANAGER_H
 #define SM2201_SPECTRUM_SAVER_SRC_SAVE_MANAGER_AUTO_SAVE_MANAGER_H
 
+#pragma warning(disable:4786)
+
 #include <string>
 #include <windows.h>
 #include "schedulerConfig.h"

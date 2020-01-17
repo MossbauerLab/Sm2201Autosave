@@ -1,5 +1,8 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_CONFIG_PROPERTY_READER_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_CONFIG_PROPERTY_READER_H
+
+#pragma warning(disable:4786)
+
 #include <string>
 #include <map>
 

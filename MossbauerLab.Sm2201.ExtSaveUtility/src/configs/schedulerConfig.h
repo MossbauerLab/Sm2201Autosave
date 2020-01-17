@@ -1,6 +1,8 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 #define SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 
+#pragma warning(disable:4786)
+
 #include <string>
 #include "propertyReader.h"
 

@@ -1,5 +1,3 @@
-// Sm2201SpectrumSaver.cpp : Defines the entry point for the application.
-//
 #include <iostream>
 //#include <iomanip.h>
 #include <string.h>
