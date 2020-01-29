@@ -15,7 +15,9 @@
 #define SM2201_UTILITY_TITLE _T("Untitled - Notepad")//_T("MC")//
                              
 #define MSDOS_PROC_NAME _T("C:\\WINDOWS\\NOTEPAD.EXE")//_T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")//
-                        
+
+#define KEYBOARD_STATUS_REG 0x64
+#define KEYBOARD_DATA_REG 0x60
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0401
@@ -247,41 +249,20 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     {
         sendKeysViaInput(charCodes);
     }
-    else
+    else if (technology == 2)
     {
-        //_outp(0x64, 0xAD);
-        //Sleep(6000);
-        int result;
-        int status = _inp(0x64);
-        std::cout <<"Keyboard status: "<< status << std::endl;
-        while (status & 1)
-            Sleep(10);
-        _outp(0x64, 0xD2);
-        _outp(0x60, 0xE0);
-        result = _inp(0x60);
-        std::cout <<"Keyboard command result: "<< result << std::endl;
-        Sleep(10);
-        _outp(0x64, 0xD2);
-        _outp(0x60, 0x5A);
-        result = _inp(0x60);
-        std::cout <<"Keyboard command result: "<< result << std::endl;
-        while (status & 2)
-            Sleep(10);
-        Sleep(10);
-        _outp(0x64, 0xD2);
-        _outp(0x60, 0xE0);
-        result = _inp(0x60);
-        std::cout <<"Keyboard command result: "<< result << std::endl;
-        Sleep(10);
-        _outp(0x64, 0xD2);
-        _outp(0x60, 0xF0);
-        result = _inp(0x60);
-        std::cout <<"Keyboard command result: "<< result << std::endl;
-        Sleep(10);
-        _outp(0x64, 0xD2);
-        _outp(0x60, 0x5A);
-        result = _inp(0x60);
-        std::cout <<"Keyboard command result: "<< result << std::endl;*/
+        std::vector<BYTE> scanCodes;
+        if (channel == 1)
+            scanCodes.push_back(0x4B);     // Left Arrow
+        else scanCodes.push_back(0x4D);    // Right Arrow
+        scanCodes.push_back(0x2E);         // C
+        scanCodes.push_back(0x1C);         // Enter
+        scanCodes.push_back(0x1C);         // Enter
+        scanCodes.push_back(0x11);         // W
+        scanCodes.push_back(0x1C);         // Enter
+        scanCodes.push_back(0x1C);         // Enter
+
+        sendKeysViaKeyboardController(scanCodes);
     }
 
 }
@@ -320,7 +301,33 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaInput(const 
     }
 }
 
-void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaKeyboardController(const std::vector<int>& scanCodes)
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaKeyboardController(const std::vector<BYTE>& scanCodes, int keyPause)
 {
-
+    std::vector<BYTE>::const_iterator it;
+    for(it = scanCodes.begin(); it != scanCodes.end(); it++)
+    {
+        // wait untill buffer is empty
+        int status = 0;
+        int result = 0;
+        do
+        {
+            status = _inp(0x64);
+            // std::cout <<"Keyboard status: "<< status << std::endl;
+            Sleep(10);
+        }
+        while (status & 1);
+            
+        // send scan code for key down
+        _outp(KEYBOARD_STATUS_REG, 0xD2);
+        _outp(KEYBOARD_DATA_REG, (*it));
+        result = _inp(KEYBOARD_DATA_REG);
+        std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
+        // send scan code for key up
+        BYTE keyUpCode = (*it) | 128;
+        Sleep(keyPause);
+        _outp(KEYBOARD_STATUS_REG, 0xD2);
+        _outp(KEYBOARD_DATA_REG, keyUpCode);
+        result = _inp(KEYBOARD_DATA_REG);
+        std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
+    }
 }
