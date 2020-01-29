@@ -12,11 +12,11 @@
 
 #define CHECK_INTERVAL 1000
 #define KEY_SEND_INTERVAL 1000
-#define SM2201_UTILITY_TITLE _T("Untitled - Notepad")//_T("MC")//
+#define SM2201_UTILITY_TITLE _T("MC")//_T("Untitled - Notepad")//
                              
-#define MSDOS_PROC_NAME _T("C:\\WINDOWS\\NOTEPAD.EXE")//_T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")//
+#define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")//_T("C:\\WINDOWS\\NOTEPAD.EXE")//
 
-#define KEYBOARD_STATUS_REG 0x64
+#define KEYBOARD_CMD_REG 0x64
 #define KEYBOARD_DATA_REG 0x60
 
 #ifndef _WIN32_WINNT
@@ -318,14 +318,14 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaKeyboardCont
         while (status & 1);
             
         // send scan code for key down
-        _outp(KEYBOARD_STATUS_REG, 0xD2);
+        _outp(KEYBOARD_CMD_REG, 0xD2);
         _outp(KEYBOARD_DATA_REG, (*it));
         result = _inp(KEYBOARD_DATA_REG);
         std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
         // send scan code for key up
         BYTE keyUpCode = (*it) | 128;
         Sleep(keyPause);
-        _outp(KEYBOARD_STATUS_REG, 0xD2);
+        _outp(KEYBOARD_CMD_REG, 0xD2);
         _outp(KEYBOARD_DATA_REG, keyUpCode);
         result = _inp(KEYBOARD_DATA_REG);
         std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
