@@ -196,6 +196,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\utils\windows\vxdAccessor.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\utils\windows\windowsInfo.cpp"
 				>
 			</File>
@@ -223,6 +227,10 @@
 			</File>
 			<File
 				RelativePath=".\src\utils\strings\strBaseUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\utils\windows\vxdAccessor.h"
 				>
 			</File>
 			<File
