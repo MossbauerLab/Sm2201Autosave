@@ -6,16 +6,26 @@ namespace MossbauerLab
     {
         namespace Windows
         {
+            #pragma pack(1)
+            struct tagPort32
+            {
+                USHORT wPort;
+                ULONG dwValue;
+                UCHAR bSize;
+            };
+            #pragma pack()
+
             class VxDAccessor
             {
             public:
                 VxDAccessor();
                 ~VxDAccessor();
-                BYTE read(DWORD port);
+                DWORD read(DWORD port, BYTE size = 1);
                 bool write(DWORD port, DWORD value);
             private:
-                void init();
+                bool init();
             private:
+                HANDLE _hVxD;
             };
         }
     }
