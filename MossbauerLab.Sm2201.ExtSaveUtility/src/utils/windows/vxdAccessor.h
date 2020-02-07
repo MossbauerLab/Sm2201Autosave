@@ -7,7 +7,7 @@ namespace MossbauerLab
         namespace Windows
         {
             #pragma pack(1)
-            struct tagPort32
+            struct TagPort32
             {
                 USHORT wPort;
                 ULONG dwValue;

@@ -25,7 +25,13 @@ DWORD MossbauerLab::Utils::Windows::VxDAccessor::read(DWORD port, BYTE size)
 {
     if( _hVxD == NULL)
         return -1;
-    return 0;
+    MossbauerLab::Utils::Windows::TagPort32 tagPort;
+    tagPort.bSize = size;
+    tagPort.wPort = port;
+    DWORD portValue = 0;
+    DeviceIoControl(_hVxD, IO32_READPORT, &tagPort, sizeof(TagPort32), 
+                    &portValue, sizeof(DWORD), NULL);
+    return portValue;
 }
 
 bool MossbauerLab::Utils::Windows::VxDAccessor::write(DWORD port, DWORD value)
