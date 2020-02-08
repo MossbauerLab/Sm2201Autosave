@@ -23,10 +23,13 @@
 #define _WIN32_WINNT 0x0401
 #endif
 
-/*enum KeyBoardManipulateTechnology 
+enum KeyBoardInteractionTechnology 
 {
-
-}*/
+    WINDOWS_MSG = 0,
+    SEND_INPUT = 1,
+    DIRECT_PORT_WRITE = 2,
+    VXD_KEYBOARD_DRV = 3
+};
 
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
 { 
@@ -61,7 +64,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, 2);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_KEYBOARD_DRV);
                             // 2. Get last saved file from outputDir
                             #if WINVER > 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), config->getOutputDir().c_str());
@@ -113,7 +116,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, 2);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_KEYBOARD_DRV);
                             // 2. Get last saved file from outputDir
                             #if WINVER > 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
@@ -246,15 +249,15 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     charCodes.push_back(VK_RETURN); // submit name
     charCodes.push_back(VK_RETURN); // submit overwrite
 
-    if (technology == 0) //sending via Windows MSG
+    if (technology == WINDOWS_MSG) //sending via Windows MSG
     {        
         sendKeysViaWindowMsg(window, charCodes);
     }
-    else if (technology == 1)
+    else if (technology == SEND_INPUT)
     {
         sendKeysViaInput(charCodes);
     }
-    else if (technology == 2)
+    else if (technology == DIRECT_PORT_WRITE)
     {
         std::vector<BYTE> scanCodes;
         if (channel == 1)
@@ -268,6 +271,10 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
         scanCodes.push_back(0x1C);         // Enter
 
         sendKeysViaKeyboardController(scanCodes);
+    }
+    else if (technology == VXD_KEYBOARD_DRV)
+    {
+    
     }
 
 }
