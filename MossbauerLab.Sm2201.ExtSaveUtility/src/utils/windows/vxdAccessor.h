@@ -21,7 +21,7 @@ namespace MossbauerLab
                 VxDAccessor();
                 ~VxDAccessor();
                 DWORD read(DWORD port, BYTE size = 1);
-                bool write(DWORD port, DWORD value);
+                bool write(DWORD port, DWORD value, BYTE size);
             private:
                 bool init();
             private:

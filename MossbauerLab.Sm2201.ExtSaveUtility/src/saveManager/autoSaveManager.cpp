@@ -23,6 +23,11 @@
 #define _WIN32_WINNT 0x0401
 #endif
 
+/*enum KeyBoardManipulateTechnology 
+{
+
+}*/
+
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
 { 
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager* manager = (MossbauerLab::Sm2201::SaveManager::AutoSaveManager*)lpParam;
