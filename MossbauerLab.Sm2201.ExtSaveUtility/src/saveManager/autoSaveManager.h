@@ -8,6 +8,7 @@
 #include <vector>
 #include <windows.h>
 #include "schedulerConfig.h"
+#include "vxdAccessor.h"
 
 namespace MossbauerLab
 {
@@ -34,6 +35,7 @@ namespace MossbauerLab
                 void sendKeysViaInput(const std::vector<DWORD>& keys, int keyPause = 500);
             private:
                 MossbauerLab::Sm2201::Config::SchedulerConfig* _config;
+                MossbauerLab::Utils::Windows::VxDAccessor* _vxdAccessor;
                 bool _state;
                 bool _threadRunning;
                 std::string _configFile;

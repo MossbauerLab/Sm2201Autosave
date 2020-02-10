@@ -191,6 +191,7 @@ MossbauerLab::Sm2201::SaveManager::AutoSaveManager::AutoSaveManager(const std::s
     :_configFile(configFile), _threadRunning(true), _state(false)
 {
     _config = new MossbauerLab::Sm2201::Config::SchedulerConfig(_configFile);
+    _vxdAccessor = new MossbauerLab::Utils::Windows::VxDAccessor();
     DWORD threadId;
     _timerThread = CreateThread(NULL, 0, TimerThreadFunc, this, 0, &threadId);
     
@@ -202,6 +203,7 @@ MossbauerLab::Sm2201::SaveManager::AutoSaveManager::~AutoSaveManager()
     if (_timerThread != NULL)
         CloseHandle(_timerThread);
     delete _config;
+    delete _vxdAccessor;
 }
 
 void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::start()
