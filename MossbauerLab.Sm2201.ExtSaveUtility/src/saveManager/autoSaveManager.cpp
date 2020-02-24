@@ -28,7 +28,7 @@ enum KeyBoardInteractionTechnology
     WINDOWS_MSG = 0,
     SEND_INPUT = 1,
     DIRECT_PORT_WRITE = 2,
-    VXD_KEYBOARD_DRV = 3
+    VXD_PORT_DRV = 3
 };
 
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
@@ -64,7 +64,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_KEYBOARD_DRV);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_PORT_DRV);
                             // 2. Get last saved file from outputDir
                             #if WINVER > 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), config->getOutputDir().c_str());
@@ -116,7 +116,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_KEYBOARD_DRV);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_PORT_DRV);
                             // 2. Get last saved file from outputDir
                             #if WINVER > 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
@@ -274,7 +274,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
 
         sendKeysViaKeyboardController(scanCodes);
     }
-    else if (technology == VXD_KEYBOARD_DRV)
+    else if (technology == VXD_PORT_DRV)
     {
     
     }
@@ -344,4 +344,9 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaKeyboardCont
         result = _inp(KEYBOARD_DATA_REG);
         std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
     }
+}
+
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaPortVxdDriver(const std::vector<BYTE>& scanCodes, int keyPause)
+{
+
 }

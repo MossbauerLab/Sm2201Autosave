@@ -32,6 +32,7 @@ namespace MossbauerLab
                 void sendKeysViaWindowMsg(HWND window, const std::vector<DWORD>& keys, int keyPause = 500);
                 // HERE we send scancodes from group 1
                 void sendKeysViaKeyboardController(const std::vector<BYTE>& scanCodes, int keyPause = 500);
+                void sendKeysViaPortVxdDriver(const std::vector<BYTE>& scanCodes, int keyPause = 500);
                 void sendKeysViaInput(const std::vector<DWORD>& keys, int keyPause = 500);
             private:
                 MossbauerLab::Sm2201::Config::SchedulerConfig* _config;
