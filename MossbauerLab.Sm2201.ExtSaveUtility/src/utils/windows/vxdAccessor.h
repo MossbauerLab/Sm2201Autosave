@@ -1,19 +1,22 @@
 #include <windows.h>
 
+#pragma warning(disable:4786)
+#pragma comment(linker, "/IGNORE:4786")
+
 namespace MossbauerLab
 {
     namespace Utils
     {
         namespace Windows
         {
-            #pragma pack(1)
+            #pragma pack(push, 1)
             struct TagPort32
             {
                 USHORT wPort;
                 ULONG dwValue;
                 UCHAR bSize;
             };
-            #pragma pack()
+            #pragma pack(pop)
 
             class VxDAccessor
             {
@@ -21,7 +24,7 @@ namespace MossbauerLab
                 VxDAccessor();
                 ~VxDAccessor();
                 DWORD read(DWORD port, BYTE size = 1);
-                bool write(DWORD port, DWORD value, BYTE size);
+                bool write(DWORD port, DWORD value, BYTE size = 1);
             private:
                 bool init();
             private:

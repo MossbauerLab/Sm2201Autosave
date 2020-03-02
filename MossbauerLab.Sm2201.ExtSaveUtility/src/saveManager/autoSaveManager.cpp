@@ -366,7 +366,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaPortVxdDrive
         int result = 0;
         do
         {
-            status = _vxdAccessor->read(KEYBOARD_CMD_REG);
+            status = _vxdAccessor->read(KEYBOARD_CMD_REG, 1);
             // std::cout <<"Keyboard status: "<< status << std::endl;
             Sleep(10);
         }
@@ -375,14 +375,14 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaPortVxdDrive
         // send scan code for key down
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
         _vxdAccessor->write(KEYBOARD_DATA_REG, (*it), 1);
-        result = _vxdAccessor->read(KEYBOARD_DATA_REG);
+        result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
         std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
         // send scan code for key up
         BYTE keyUpCode = (*it) | 128;
         Sleep(keyPause);
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
         _vxdAccessor->write(KEYBOARD_DATA_REG, keyUpCode, 1);
-        result = _vxdAccessor->read(KEYBOARD_DATA_REG);
+        result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
         std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
     }
 }
