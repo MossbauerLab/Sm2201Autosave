@@ -223,9 +223,8 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::reloadConfig()
     _config->reload();
 }
 
-void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND window, int channel, int technology)
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::activateWindow(HWND window)
 {
-    // 0. make window active
     /*INPUT keyBoardInput;
     keyBoardInput.type = INPUT_KEYBOARD;
     keyBoardInput.ki.wScan = 0;
@@ -240,25 +239,33 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     keyBoardInput.ki.dwFlags = 2;   // key up
     SendInput(1, &keyBoardInput, sizeof(INPUT));*/
 
-    std::vector<DWORD> charCodes;
-    if (channel == 1)
-        charCodes.push_back(VK_LEFT);
-    else charCodes.push_back(VK_RIGHT);
-    charCodes.push_back(0x43);      // continue
-    charCodes.push_back(VK_RETURN); // scaling coeff
-    charCodes.push_back(VK_RETURN); // stop update
-    charCodes.push_back(0x57);      // write
-    charCodes.push_back(VK_RETURN); // submit name
-    charCodes.push_back(VK_RETURN); // submit overwrite
+    SendMessage(window, WM_ACTIVATE, WA_CLICKACTIVE, 0);
+}
 
-    if (technology == WINDOWS_MSG) //sending via Windows MSG
-    {        
-        sendKeysViaWindowMsg(window, charCodes);
-    }
-    else if (technology == SEND_INPUT)
-    {
-        sendKeysViaInput(charCodes);
-    }
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND window, int channel, int technology)
+{
+    // 0. make window active
+    activateWindow(window);
+
+    if (technology == WINDOWS_MSG || technology == SEND_INPUT) //sending via Windows MSG
+    {  
+        std::vector<DWORD> charCodes;
+        if (channel == 1)
+            charCodes.push_back(VK_LEFT);
+        else charCodes.push_back(VK_RIGHT);
+        charCodes.push_back(0x43);      // continue
+        charCodes.push_back(VK_RETURN); // scaling coeff
+        charCodes.push_back(VK_RETURN); // stop update
+        charCodes.push_back(0x57);      // write
+        charCodes.push_back(VK_RETURN); // submit name
+        charCodes.push_back(VK_RETURN); // submit overwrite
+        
+        if(technology == WINDOWS_MSG)
+            sendKeysViaWindowMsg(window, charCodes);
+        else
+            sendKeysViaInput(charCodes);
+    } 
+
     else if (technology == DIRECT_PORT_WRITE)
     {
         std::vector<BYTE> scanCodes;
@@ -376,13 +383,13 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaPortVxdDrive
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
         _vxdAccessor->write(KEYBOARD_DATA_REG, (*it), 1);
         result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
-        std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
+        //std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
         // send scan code for key up
         BYTE keyUpCode = (*it) | 128;
         Sleep(keyPause);
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
         _vxdAccessor->write(KEYBOARD_DATA_REG, keyUpCode, 1);
         result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
-        std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
+        //std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
     }
 }

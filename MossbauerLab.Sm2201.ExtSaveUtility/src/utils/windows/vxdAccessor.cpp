@@ -20,7 +20,7 @@ bool MossbauerLab::Utils::Windows::VxDAccessor::init()
 {
     _hVxD = CreateFile(_T("\\\\.\\DIO_W55"), 0, 0, 0, 
                        CREATE_NEW, FILE_FLAG_DELETE_ON_CLOSE, 0);
-    DWORD errCode = GetLastError();
+    // DWORD errCode = GetLastError();
     return _hVxD != INVALID_HANDLE_VALUE;
 }
 
