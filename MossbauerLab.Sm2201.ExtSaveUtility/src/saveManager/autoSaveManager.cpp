@@ -96,7 +96,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
                             }
-                            //delete searchResult;
+                            delete searchResult;
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                         }
                         else if (numberOfWindows > 1)
@@ -151,7 +151,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
                             }
-                            // delete searchResult;
+                            delete searchResult;
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH2_SAVED);
                         }           
                         else if (numberOfWindows > 1)

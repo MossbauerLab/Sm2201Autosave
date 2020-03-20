@@ -6,14 +6,18 @@ MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TC
     if (result && filePath != NULL && fileName != NULL)
     {
         int filePathLength = _tcslen(filePath);
-        _filePath = new TCHAR[filePathLength];
+        _filePath = new TCHAR[filePathLength * sizeof(TCHAR) + 1];
         _tcscpy(_filePath, filePath);
 
         int fileNameLength = _tcslen(fileName);
-        _fileName = new TCHAR[fileNameLength];
+        _fileName = new TCHAR[fileNameLength * sizeof(TCHAR) + 1];
         _tcscpy(_fileName, fileName);
     }
-
+    else 
+    {
+        _filePath = NULL;
+        _fileName = NULL;
+    }
 }
 
 MossbauerLab::Utils::Windows::FileSearchResult::~FileSearchResult()
@@ -68,9 +72,10 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
 
     TCHAR resultFile[MAX_PATH];
     _tcscpy(resultFile, directory);
-	_tcscat(resultFile, _T("\\"));
+    _tcscat(resultFile, _T("\\"));
     _tcscat(resultFile, latestFileData.cFileName);
-    return new MossbauerLab::Utils::Windows::FileSearchResult(true, latestFileData.cFileName, resultFile);
+    MossbauerLab::Utils::Windows::FileSearchResult* result = new MossbauerLab::Utils::Windows::FileSearchResult(true, latestFileData.cFileName, resultFile);
+    return result;
 }
 
 TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(const TCHAR* file)
