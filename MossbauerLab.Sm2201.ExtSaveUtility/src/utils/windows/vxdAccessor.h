@@ -1,3 +1,6 @@
+#ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_VXD_ACCESSOR_H
+#define SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_VXD_ACCESSOR_H
+
 #include <windows.h>
 
 #pragma warning(disable:4786)
@@ -34,3 +37,4 @@ namespace MossbauerLab
     }
 }
 
+#endif

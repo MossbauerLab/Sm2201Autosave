@@ -62,6 +62,7 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
 # ADD CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /GZ /c
@@ -86,36 +87,118 @@ LINK32=link.exe
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\applicationTextUserInterface.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\autoSaveManager.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\fileInfo.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\main.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\config\propertyReader.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\configs\schedulerConfig.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings\strBaseUtils.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\vxdAccessor.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\windowsInfo.cpp
+
+!IF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "MossbauerLab_Sm2201_ExtSaveUtility_VC6 - Win32 Debug"
+
+# ADD CPP /D _WIN32_WINNT=0x0401 _WINNT_VERSION=0x0401
+# SUBTRACT CPP /D "_MBCS"
+
+!ENDIF 
+
 # End Source File
 # End Group
 # Begin Group "Header Files"
 
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\applicationTextUserInterface.h
+# End Source File
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\saveManager\autoSaveManager.h
@@ -135,6 +218,10 @@ SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\configs\schedulerConfig.h
 # Begin Source File
 
 SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\strings\strBaseUtils.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\MossbauerLab.Sm2201.ExtSaveUtility\src\utils\windows\vxdAccessor.h
 # End Source File
 # Begin Source File
 

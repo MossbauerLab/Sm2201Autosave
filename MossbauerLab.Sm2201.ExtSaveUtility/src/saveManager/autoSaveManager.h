@@ -9,6 +9,7 @@
 #include <windows.h>
 #include "schedulerConfig.h"
 #include "vxdAccessor.h"
+#include "applicationTextUserInterface.h"
 
 namespace MossbauerLab
 {

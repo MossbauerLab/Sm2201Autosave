@@ -9,15 +9,21 @@
 #include <sstream>
 #include <tchar.h>
 #include <conio.h>
+#include <time.h>
+#include <ctime>
 
 #define CHECK_INTERVAL 1000
 #define KEY_SEND_INTERVAL 1000
-#define SM2201_UTILITY_TITLE _T("MC")//_T("Untitled - Notepad")//
+#define SM2201_UTILITY_TITLE _T("MC")
                              
-#define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")//_T("C:\\WINDOWS\\NOTEPAD.EXE")//
+#define MSDOS_PROC_NAME _T("C:\\WINDOWS\\SYSTEM\\WINOA386.MOD")
 
 #define KEYBOARD_CMD_REG 0x64
 #define KEYBOARD_DATA_REG 0x60
+
+const std::string MS_FROM_CH1_SAVED = "Messbaues spectrum from CH 1 was saved.";
+const std::string MS_FROM_CH2_SAVED = "Messbaues spectrum from CH 2 was saved.";
+const std::string NO_MC_WINDOW = "There are no MS-DOS Window related to SM2201 Utility (MC.exe).";
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0401
@@ -32,7 +38,8 @@ enum KeyBoardInteractionTechnology
 };
 
 DWORD WINAPI TimerThreadFunc (LPVOID lpParam) 
-{ 
+{
+    MossbauerLab::Sm2201::SaveManager::AutoSaveStats stats;
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager* manager = (MossbauerLab::Sm2201::SaveManager::AutoSaveManager*)lpParam;
     if (manager == NULL)
     {
@@ -43,6 +50,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
     long channellElapsedTime = 0;
     long channel2ElapsedTime = 0;
     long elapsedTime = 0;
+    time_t now = time(NULL);
 
     TCHAR outputDir[MAX_PATH];
     TCHAR fullOutputName [MAX_PATH];
@@ -50,6 +58,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
     while(manager->isRunning())
     {
         MossbauerLab::Sm2201::Config::SchedulerConfig* config = manager->getConfig();
+        // state is On
         if(manager->getState())
         {
             if (config->getState())
@@ -61,6 +70,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
                         std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, MSDOS_PROC_NAME, SM2201_UTILITY_TITLE);
                         int numberOfWindows = selectedWindows.size();
+                        stats.channel1SaveTime += config->getChannelOnePeriod();
+                        stats.channel1LastSaveTime = stats.channel1SaveTime;
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
@@ -83,17 +94,20 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
+
+                                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                             }
                             //delete searchResult;
-                            std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
+                            // std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows > 1)
                         {
-                            std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
+                            // std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows == 0)
                         {
-                            std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(NO_MC_WINDOW);
+                            // std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channellElapsedTime = 0;
@@ -113,6 +127,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
                         std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, MSDOS_PROC_NAME, SM2201_UTILITY_TITLE);
                         int numberOfWindows = selectedWindows.size();
+                        stats.channel2SaveTime += config->getChannelTwoPeriod();
+                        stats.channel2LastSaveTime = stats.channel2SaveTime;
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
@@ -136,17 +152,19 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
+                                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                             }
                             // delete searchResult;
-                            std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
-                        }           else if (numberOfWindows > 1)
-             
+                            // std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
+                        }           
+                        else if (numberOfWindows > 1)
                         {
-                            std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
+                            // std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
                         }
                         else if (numberOfWindows == 0)
                         {
-                            std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(NO_MC_WINDOW);
+                            // std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channel2ElapsedTime = 0;
@@ -158,6 +176,13 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         elapsedTime += CHECK_INTERVAL;
                     }
                 }
+                stats.channel1TimeLeft = config->isChannelOneUsing() 
+                                       ? config->getChannelOnePeriod() - channellElapsedTime / 1000
+                                       : 0;
+                stats.channel2TimeLeft = config->isChannelTwoUsing() 
+                                       ? config->getChannelTwoPeriod() - channel2ElapsedTime / 1000
+                                       : 0;
+                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawUi(true, config, &stats);
             }
             else
             {
@@ -167,17 +192,24 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                 Sleep(CHECK_INTERVAL);
             }
         }
+        // state is Off
         else
         {
             channellElapsedTime = 0;
             channel2ElapsedTime = 0;
             Sleep(CHECK_INTERVAL);
             elapsedTime += CHECK_INTERVAL;
+            stats.channel1TimeLeft = 0;
+            stats.channel2TimeLeft = 0;
+            stats.channel1SaveTime = now + config->getChannelOnePeriod();
+            stats.channel2SaveTime = now + config->getChannelTwoPeriod();
+            now = time(NULL);
+            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawUi(false, config, &stats);
         }
         
         if (elapsedTime > 0 && elapsedTime % (20 * CHECK_INTERVAL) == 0)
         {
-            std::cout << "===== >>> Autosave manager config was reloaded. <<< =====" << std::endl;
+            // std::cout << "===== >>> Autosave manager config was reloaded. <<< =====" << std::endl;
             manager->reloadConfig();
             elapsedTime = 0;
         }
@@ -185,7 +217,6 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
 
     return 0; 
 }
-
 
 MossbauerLab::Sm2201::SaveManager::AutoSaveManager::AutoSaveManager(const std::string& configFile)
     :_configFile(configFile), _threadRunning(true), _state(false)
