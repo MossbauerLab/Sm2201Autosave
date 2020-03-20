@@ -26,7 +26,7 @@ const std::string UNKNOWN_CMD_MSG = "unknown";
 int main(int argc, char* argv[])
 {
     MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::init();
-    std::string condigFilePath = "D:\\projects\\Sm2201Autosave\\Debug\\autosaveConfig.txt";
+    std::string condigFilePath = ".\\autosaveConfig.txt";
     std::string userInput;
     MossbauerLab::Sm2201::SaveManager::AutoSaveManager manager(condigFilePath);
     while(1)
