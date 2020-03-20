@@ -60,5 +60,4 @@ Right Arrow - на канал 2
     
 `Text UI Examples:
 
-![Channel 1 spec saved]
-(https://github.com/MossbauerLab/Sm2201Autosave/blob/master/img/new_text_ui(ch1-saved).png?raw=true)
+![Channel 1 spec saved](https://github.com/MossbauerLab/Sm2201Autosave/blob/master/img/new_text_ui(ch1-saved).png)
