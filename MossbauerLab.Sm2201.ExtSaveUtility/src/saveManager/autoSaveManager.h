@@ -30,6 +30,7 @@ namespace MossbauerLab
                 void reloadConfig();
                 void sendKeysSequence(HWND window, int channel, int technology = 0);
             private:
+                void restoreWindow(HWND window);
                 void activateWindow(HWND window);
                 void sendKeysViaWindowMsg(HWND window, const std::vector<DWORD>& keys, int keyPause = 500);
                 // HERE we send scancodes from group 1

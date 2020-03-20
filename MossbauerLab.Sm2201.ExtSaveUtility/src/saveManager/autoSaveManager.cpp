@@ -250,6 +250,22 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::reloadConfig()
     _config->reload();
 }
 
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::restoreWindow(HWND window)
+{
+    WINDOWPLACEMENT placement;
+    placement.length = sizeof(placement);
+
+    if(!GetWindowPlacement(window, &placement))
+        return;
+
+    BOOL minimized = (placement.showCmd & SW_SHOWMINIMIZED) != 0;
+    if(!minimized)
+        return;
+
+    placement.showCmd = SW_SHOWNORMAL;
+    SetWindowPlacement(window, &placement);
+}
+
 void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::activateWindow(HWND window)
 {
     /*INPUT keyBoardInput;
@@ -265,7 +281,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::activateWindow(HWND win
     //SetForegroundWindow(window);
     keyBoardInput.ki.dwFlags = 2;   // key up
     SendInput(1, &keyBoardInput, sizeof(INPUT));*/
-
+    restoreWindow(window);
     SendMessage(window, WM_ACTIVATE, WA_CLICKACTIVE, 0);
 }
 
