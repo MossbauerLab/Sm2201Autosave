@@ -58,4 +58,7 @@ Right Arrow - на канал 2
     # archiveDir - директория (АБСОЛЮТНЫЙ ПУТЬ), в которую спектры будут копироватьс¤ из outputDir с уникальным именем, содержащим timestamp,
     archiveDir=C:\SavedSpecs
     
-`
+`Text UI Examples:
+
+![Channel 1 spec saved]
+(https://github.com/MossbauerLab/Sm2201Autosave/blob/master/img/new_text_ui(ch1-saved).png?raw=true)
