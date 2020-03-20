@@ -48,9 +48,11 @@ int main(int argc, char* argv[])
         }
         else 
         {
-            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(UNKNOWN_CMD_MSG);
+            if (userInput.size() > 1)
+                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(UNKNOWN_CMD_MSG);
         }
         MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::clearCmd();
+        userInput.erase(userInput.begin(), userInput.end());
     }
     return 0;
 }

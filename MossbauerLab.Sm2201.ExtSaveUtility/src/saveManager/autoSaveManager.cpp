@@ -24,6 +24,7 @@
 const std::string MS_FROM_CH1_SAVED = "Messbaues spectrum from CH 1 was saved.";
 const std::string MS_FROM_CH2_SAVED = "Messbaues spectrum from CH 2 was saved.";
 const std::string NO_MC_WINDOW = "There are no MS-DOS Window related to SM2201 Utility (MC.exe).";
+const std::string MORE_MC_WINDOWS = "There are more then 1 MS-DOS SM2201 Utility Window (MC.exe).";
 
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0401
@@ -94,20 +95,17 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
-
-                                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                             }
                             //delete searchResult;
-                            // std::cout << "===== >>> Save spectrum from channel 1. <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                         }
                         else if (numberOfWindows > 1)
                         {
-                            // std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MORE_MC_WINDOWS);
                         }
                         else if (numberOfWindows == 0)
                         {
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(NO_MC_WINDOW);
-                            // std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channellElapsedTime = 0;
@@ -152,19 +150,17 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
-                                MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
                             }
                             // delete searchResult;
-                            // std::cout << "===== >>> Save spectrum from channel 2. <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH2_SAVED);
                         }           
                         else if (numberOfWindows > 1)
                         {
-                            // std::cout << "===== >>> There are more then 1 MS-DOS Window related to SM2201 Utility (MC.exe), please close inactive windows. <<< =====" << std::endl;
+                            MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MORE_MC_WINDOWS);
                         }
                         else if (numberOfWindows == 0)
                         {
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(NO_MC_WINDOW);
-                            // std::cout << "===== >>> There are no MS-DOS Window related to SM2201 Utility (MC.exe). <<< =====" << std::endl;
                         }
 
                         channel2ElapsedTime = 0;
@@ -383,7 +379,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaKeyboardCont
         _outp(KEYBOARD_CMD_REG, 0xD2);
         _outp(KEYBOARD_DATA_REG, (*it));
         result = _inp(KEYBOARD_DATA_REG);
-        //std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
+        // std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
         // send scan code for key up
         BYTE keyUpCode = (*it) | 128;
         Sleep(keyPause);

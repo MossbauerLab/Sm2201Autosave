@@ -68,7 +68,7 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
 
     TCHAR resultFile[MAX_PATH];
     _tcscpy(resultFile, directory);
-    _tcscat(resultFile, _T("\\"));
+	_tcscat(resultFile, _T("\\"));
     _tcscat(resultFile, latestFileData.cFileName);
     return new MossbauerLab::Utils::Windows::FileSearchResult(true, latestFileData.cFileName, resultFile);
 }
