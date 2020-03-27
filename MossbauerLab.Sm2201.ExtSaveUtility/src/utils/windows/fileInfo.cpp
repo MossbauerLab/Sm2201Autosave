@@ -5,13 +5,13 @@ MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TC
 {
     if (result && filePath != NULL && fileName != NULL)
     {
-        int filePathLength = _tcslen(filePath);
-        _filePath = new TCHAR[filePathLength * sizeof(TCHAR) + 1];
-        _tcscpy(_filePath, filePath);
+        int filePathLength = _tcslen(filePath) + 1;  // _tcslen count without terminsting \0 byte
+        _filePath = new TCHAR[filePathLength * sizeof(TCHAR)];
+        _tcscpy_s(_filePath, filePathLength, filePath);
 
-        int fileNameLength = _tcslen(fileName);
-        _fileName = new TCHAR[fileNameLength * sizeof(TCHAR) + 1];
-        _tcscpy(_fileName, fileName);
+        int fileNameLength = _tcslen(fileName) + 1;  // _tcslen count without terminsting \0 byte
+        _fileName = new TCHAR[fileNameLength * sizeof(TCHAR)];
+        _tcscpy_s(_fileName, fileNameLength, fileName);
     }
     else 
     {
@@ -36,8 +36,8 @@ MossbauerLab::Utils::Windows::FileSearchResult::~FileSearchResult()
 MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(const TCHAR* directory, const TCHAR* searchPattern)
 {
     TCHAR fullPath[MAX_PATH];
-    _tcscpy(fullPath, directory);
-    _tcscat(fullPath, searchPattern);
+    _tcscpy_s(fullPath, _tcslen(directory) + 1, directory);
+    _tcscat_s(fullPath, MAX_PATH, searchPattern);
     std::vector<WIN32_FIND_DATA> files;
     WIN32_FIND_DATA searchData;
     HANDLE hFind = INVALID_HANDLE_VALUE;
@@ -71,9 +71,9 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
     }
 
     TCHAR resultFile[MAX_PATH];
-    _tcscpy(resultFile, directory);
-    _tcscat(resultFile, _T("\\"));
-    _tcscat(resultFile, latestFileData.cFileName);
+    _tcscpy_s(resultFile, MAX_PATH, directory);
+    _tcscat_s(resultFile, MAX_PATH, _T("\\"));
+    _tcscat_s(resultFile, MAX_PATH, latestFileData.cFileName);
     MossbauerLab::Utils::Windows::FileSearchResult* result = new MossbauerLab::Utils::Windows::FileSearchResult(true, latestFileData.cFileName, resultFile);
     return result;
 }

@@ -31,7 +31,7 @@ namespace MossbauerLab
                     void TestGetWindowInfoByTitleAndProcess()
                     {
                         std::vector<MossbauerLab::Utils::Windows::WindowInfo> allWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::get();
-                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, _T("devenv.exe"), _T("&Build"));
+                        std::vector<MossbauerLab::Utils::Windows::WindowInfo> selectedWindows = MossbauerLab::Utils::Windows::WindowInfoHelper::find(allWindows, _T("explorer.exe"), _T("DDE Server Window"));
                         int numberOfWindows = selectedWindows.size();
                         Assert::IsTrue(numberOfWindows > 0);
                     }
