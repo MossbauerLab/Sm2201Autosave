@@ -268,19 +268,6 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::restoreWindow(HWND wind
 
 void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::activateWindow(HWND window)
 {
-    /*INPUT keyBoardInput;
-    keyBoardInput.type = INPUT_KEYBOARD;
-    keyBoardInput.ki.wScan = 0;
-    keyBoardInput.ki.time = 0;
-    keyBoardInput.ki.dwExtraInfo = 0;
-
-    keyBoardInput.ki.wVk = VK_MENU;
-    keyBoardInput.ki.dwFlags = 0;   // key down
-    SendInput(1, &keyBoardInput, sizeof(INPUT));
-    
-    //SetForegroundWindow(window);
-    keyBoardInput.ki.dwFlags = 2;   // key up
-    SendInput(1, &keyBoardInput, sizeof(INPUT));*/
     restoreWindow(window);
     SendMessage(window, WM_ACTIVATE, WA_CLICKACTIVE, 0);
 }
