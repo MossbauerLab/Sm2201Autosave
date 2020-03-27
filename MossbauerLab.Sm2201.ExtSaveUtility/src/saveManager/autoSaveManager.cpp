@@ -307,7 +307,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
         scanCodes.push_back(0x1C);         // Enter
         scanCodes.push_back(0x11);         // W
         scanCodes.push_back(0x1C);         // Enter
-        scanCodes.push_back(0x1C);         // Enter
+        scanCodes.push_back(0x15);         // Y
 
         sendKeysViaKeyboardController(scanCodes);
     }
@@ -322,7 +322,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
         scanCodes.push_back(0x1C);         // Enter
         scanCodes.push_back(0x11);         // W
         scanCodes.push_back(0x1C);         // Enter
-        scanCodes.push_back(0x1C);         // Enter
+        scanCodes.push_back(0x15);         // Y
         sendKeysViaPortVxdDriver(scanCodes);
     }
 
