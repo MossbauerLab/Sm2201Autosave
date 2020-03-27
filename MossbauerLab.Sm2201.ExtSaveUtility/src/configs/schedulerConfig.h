@@ -1,11 +1,13 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 #define SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 
-#pragma warning(disable:4786)
-#pragma comment(linker, "/IGNORE:4786")
-
 #include <string>
 #include "propertyReader.h"
+
+#if WINVER < 0x0500
+    #pragma warning(disable:4786)
+    #pragma comment(linker, "/IGNORE:4786")
+#endif
 
 namespace MossbauerLab
 {

@@ -3,8 +3,10 @@
 
 #include <windows.h>
 
-#pragma warning(disable:4786)
-#pragma comment(linker, "/IGNORE:4786")
+#if WINVER < 0x0500
+    #pragma warning(disable:4786)
+    #pragma comment(linker, "/IGNORE:4786")
+#endif
 
 namespace MossbauerLab
 {

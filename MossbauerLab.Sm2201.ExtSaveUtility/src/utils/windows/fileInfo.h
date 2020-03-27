@@ -1,13 +1,15 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_FILE_INFO_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_FILE_INFO_H
 
-#pragma warning(disable:4786)
-#pragma comment(linker, "/IGNORE:4786")
-
 #include <vector>
 #include <string>
 #include <windows.h>
 #include <tchar.h>
+
+#if WINVER < 0x0500
+    #pragma warning(disable:4786)
+    #pragma comment(linker, "/IGNORE:4786")
+#endif
 
 namespace MossbauerLab
 {
