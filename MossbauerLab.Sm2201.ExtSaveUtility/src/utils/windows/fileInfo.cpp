@@ -7,11 +7,19 @@ MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TC
     {
         int filePathLength = _tcslen(filePath) + 1;  // _tcslen count without terminsting \0 byte
         _filePath = new TCHAR[filePathLength * sizeof(TCHAR)];
-        _tcscpy_s(_filePath, filePathLength, filePath);
+        #if WINVER >= 0x0500
+            _tcscpy_s(_filePath, filePathLength, filePath);
+        #else
+            _tcscpy(_filePath, filePath);
+        #endif
 
         int fileNameLength = _tcslen(fileName) + 1;  // _tcslen count without terminsting \0 byte
         _fileName = new TCHAR[fileNameLength * sizeof(TCHAR)];
-        _tcscpy_s(_fileName, fileNameLength, fileName);
+        #if WINVER >= 0x0500
+            _tcscpy_s(_fileName, fileNameLength, fileName);
+        #else
+            _tcscpy(_fileName, fileName);
+        #endif
     }
     else 
     {
@@ -36,8 +44,13 @@ MossbauerLab::Utils::Windows::FileSearchResult::~FileSearchResult()
 MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(const TCHAR* directory, const TCHAR* searchPattern)
 {
     TCHAR fullPath[MAX_PATH];
-    _tcscpy_s(fullPath, _tcslen(directory) + 1, directory);
-    _tcscat_s(fullPath, MAX_PATH, searchPattern);
+    #if WINVER >= 0x0500
+        _tcscpy_s(fullPath, _tcslen(directory) + 1, directory);
+        _tcscat_s(fullPath, MAX_PATH, searchPattern);
+    #else
+        _tcscpy(fullPath, directory);
+        _tcscat(fullPath, searchPattern);
+    #endif
     std::vector<WIN32_FIND_DATA> files;
     WIN32_FIND_DATA searchData;
     HANDLE hFind = INVALID_HANDLE_VALUE;
@@ -71,9 +84,15 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
     }
 
     TCHAR resultFile[MAX_PATH];
-    _tcscpy_s(resultFile, MAX_PATH, directory);
-    _tcscat_s(resultFile, MAX_PATH, _T("\\"));
-    _tcscat_s(resultFile, MAX_PATH, latestFileData.cFileName);
+    #if WINVER >= 0x0500
+        _tcscpy_s(resultFile, MAX_PATH, directory);
+        _tcscat_s(resultFile, MAX_PATH, _T("\\"));
+        _tcscat_s(resultFile, MAX_PATH, latestFileData.cFileName);
+    #else
+        _tcscpy(resultFile, directory);
+        _tcscat(resultFile, _T("\\"));
+        _tcscat(resultFile, latestFileData.cFileName);
+    #endif
     MossbauerLab::Utils::Windows::FileSearchResult* result = new MossbauerLab::Utils::Windows::FileSearchResult(true, latestFileData.cFileName, resultFile);
     return result;
 }
@@ -92,11 +111,19 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(co
     int extensionLength = length - index + 2;
     TCHAR* extensionBuffer = new TCHAR[extensionLength];
     memset(extensionBuffer, 0, (extensionLength) * sizeof(TCHAR));
-    _tcsncpy_s(timestampedName, timestampedLength, file, index);
-    _tcsncpy_s(extensionBuffer, extensionLength , &file[index], extensionLength);
-    _stprintf_s(timestampedName, timestampedLength, _T("%s_%04d-%02d-%02d_%02d-%02d-%02d%s"), 
-                timestampedName, timestamp.wYear, timestamp.wMonth, timestamp.wDay, 
-                timestamp.wHour, timestamp.wMinute, timestamp.wSecond, extensionBuffer);
+    #if WINVER >= 0x0500
+        _tcsncpy_s(timestampedName, timestampedLength, file, index);
+        _tcsncpy_s(extensionBuffer, extensionLength, &file[index], extensionLength);
+        _stprintf_s(timestampedName, timestampedLength, _T("%s_%04d-%02d-%02d_%02d-%02d-%02d%s"), 
+                    timestampedName, timestamp.wYear, timestamp.wMonth, timestamp.wDay, 
+                    timestamp.wHour, timestamp.wMinute, timestamp.wSecond, extensionBuffer);
+    #else
+        _tcsncpy(timestampedName, file, index);
+        _tcsncpy(extensionBuffer, &file[index], extensionLength);
+        _stprintf(timestampedName, _T("%s_%04d-%02d-%02d_%02d-%02d-%02d%s"), 
+                  timestampedName, timestamp.wYear, timestamp.wMonth, timestamp.wDay, 
+                  timestamp.wHour, timestamp.wMinute, timestamp.wSecond, extensionBuffer);
+    #endif
     delete[] extensionBuffer;
     return timestampedName;
 }

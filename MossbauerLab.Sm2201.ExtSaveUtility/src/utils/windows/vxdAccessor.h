@@ -1,12 +1,12 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_VXD_ACCESSOR_H
 #define SM2201_SPECTRUM_SAVER_SRC_UTILS_WINDOWS_VXD_ACCESSOR_H
 
-#include <windows.h>
-
 #if WINVER < 0x0500
     #pragma warning(disable:4786)
-    #pragma comment(linker, "/IGNORE:4786")
 #endif
+
+#include <windows.h>
+
 
 namespace MossbauerLab
 {

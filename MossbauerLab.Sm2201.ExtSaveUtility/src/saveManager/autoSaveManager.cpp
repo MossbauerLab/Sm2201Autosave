@@ -78,7 +78,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_PORT_DRV);
                             // 2. Get last saved file from outputDir
-                            #if WINVER > 0x0500
+                            #if WINVER >= 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), config->getOutputDir().c_str());
                             #else
                                 sprintf(outputDir, _T("%hs"), config->getOutputDir().c_str());
@@ -91,7 +91,11 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
-                                _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #if WINVER >= 0x0500
+                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #else
+                                    _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #endif
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
@@ -132,7 +136,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                             // 1. Send Key Sequence
                             manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_PORT_DRV);
                             // 2. Get last saved file from outputDir
-                            #if WINVER > 0x0500
+                            #if WINVER >= 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
                                             config->getOutputDir().c_str());
                             #else
@@ -146,7 +150,11 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
-                                _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #if WINVER >= 0x0500
+                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #else
+                                    _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                #endif
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;

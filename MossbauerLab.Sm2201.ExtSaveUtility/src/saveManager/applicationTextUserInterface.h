@@ -1,16 +1,15 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_SAVE_MANAGER_APPLICATION_TEXT_USER_INTERFACE_H
 #define SM2201_SPECTRUM_SAVER_SRC_SAVE_MANAGER_APPLICATION_TEXT_USER_INTERFACE_H
 
+#if WINVER < 0x0500
+    #pragma warning(disable:4786)
+#endif
+
 #include <string>
 #include <vector>
 #include <windows.h>
 #include <time.h>
 #include "schedulerConfig.h"
-
-#if WINVER < 0x0500
-    #pragma warning(disable:4786)
-    #pragma comment(linker, "/IGNORE:4786")
-#endif
 
 namespace MossbauerLab
 {
