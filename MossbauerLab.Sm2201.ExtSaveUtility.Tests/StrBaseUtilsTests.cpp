@@ -61,6 +61,15 @@ namespace MossbauerLab
                         Assert::AreEqual(13, index);
                     }
 
+                    [TestMethod]
+                    void TestLastIndexOf()
+                    {
+                        TCHAR str[16] = _T("C:\\apiapiapi");
+                        TCHAR pattern1[4] = _T("api");
+                        int index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(str, pattern1);
+                        Assert::AreEqual(9, index);
+                    }
+
                 #pragma region InternalTestContext
                 private:
                     TestContext^ testContextInstance;

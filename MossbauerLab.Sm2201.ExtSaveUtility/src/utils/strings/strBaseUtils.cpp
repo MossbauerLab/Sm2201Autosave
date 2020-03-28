@@ -82,6 +82,30 @@ int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(const TCHAR* str, const 
     return -1;
 }
 
+int MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(const TCHAR* str, const TCHAR* subStr)
+{
+    if (str == NULL || subStr == NULL)
+        return -1;
+    int searchIndex = 0;
+    int subStrLen = _tcslen(subStr);
+    const TCHAR* srcStr = str;
+    int index = 0;
+    int cycle = 0;
+    while(index != -1)
+    {
+        index = indexOf(srcStr, subStr);
+        if (index != -1)
+        {
+            searchIndex += index + cycle * subStrLen;
+            srcStr = str + searchIndex;
+                //srcStr + index + subStrLen;
+            if (cycle == 0)
+                cycle = 1;
+        }
+    }
+    return searchIndex;
+}
+
 long MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(const std::string& str, int radix)
 {
     long value = 0;
