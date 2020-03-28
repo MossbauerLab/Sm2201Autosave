@@ -41,13 +41,14 @@ std::string MossbauerLab::Utils::Strings::StrBaseUtils::trim(const char *str, in
     return resultStr;
 }
 
-int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(TCHAR* str, TCHAR* subStr)
+int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(const TCHAR* str, const TCHAR* subStr)
 {
     if (*str == NULL || *subStr == NULL)
         return -1;
-    TCHAR* scanningStr = *subStr;
+    const TCHAR* scanningStr = subStr;
     bool matches = false;
     int index = 0;
+    int matchIndex = 0;
     
     while(*str != NULL)
     {
@@ -57,20 +58,23 @@ int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(TCHAR* str, TCHAR* subSt
             {
                 matches = true;
                 scanningStr++;
+                matchIndex = index;
             }
         }
         else
         {
             if (*scanningStr == NULL) // end of searching str, return index ...
             {
-                return index;
+                return matchIndex;
             }
 
             if(*str != *scanningStr)
             {
                 matches = false;
+                scanningStr = subStr;
             }
-            scanningStr++;
+            else
+                scanningStr++;
         }
         str++;
         index++;

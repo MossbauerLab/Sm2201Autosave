@@ -12,9 +12,9 @@
  * Because Win98 C++ stdlib don't have utilities for i.e. Trim
  */
 
-#ifndef TCHAR
+/*#ifndef TCHAR
     #define TCHAR unsigned char
-#endif
+#endif*/
 
 namespace MossbauerLab
 {
@@ -28,8 +28,8 @@ namespace MossbauerLab
                 static std::string ltrim(const char* str);
                 static std::string rtrim(const char* str, int length);
                 static std::string trim(const char* str, int length);
-                static int indexOf(const TCHAR* str, TCHAR* subStr);
-                static int lastIndexOf(const TCHAR* str, TCHAR* subStr);
+                static int indexOf(const TCHAR* str, const TCHAR* subStr);
+                //static int lastIndexOf(const TCHAR* str, TCHAR* subStr);
 
                 static long parseLong(const std::string& str, int radix = 10);
                 static bool parseBool(const std::string& str);

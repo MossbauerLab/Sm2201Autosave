@@ -1,3 +1,4 @@
+#include <tchar.h>
 #include "strBaseUtils.h"
 
 using namespace System;
@@ -43,6 +44,22 @@ namespace MossbauerLab
                         result = MossbauerLab::Utils::Strings::StrBaseUtils::parseBool("true");
                         Assert::AreEqual(true, result);
                     };
+
+                    [TestMethod]
+                    void TestIndexOf()
+                    {
+                        TCHAR str[30] = _T("C:\\Autosaves\\specs\\1S210620\\");
+                        TCHAR pattern1[4] = _T("sav");
+                        int index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str, pattern1);
+                        Assert::AreEqual(7, index);
+                        TCHAR pattern2[6] = _T("10620");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str, pattern2);
+                        Assert::AreEqual(22, index);
+                        TCHAR str2[22] = _T("C:\\Autosaves\\saved\\1");
+                        TCHAR pattern3[6]=_T("saved");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str2, pattern3);
+                        Assert::AreEqual(13, index);
+                    }
 
                 #pragma region InternalTestContext
                 private:
