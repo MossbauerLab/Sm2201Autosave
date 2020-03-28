@@ -64,7 +64,7 @@ BOOL CALLBACK EnumWindowsCallback(HWND hWnd, LPARAM lparam)
             {
                 if(procEntry.th32ProcessID == info.processId)
                 {
-                    _tcscpy(info.processName, procEntry.szExeFile);
+                    _tcscpy_s(info.processName, sizeof(info.processName)/sizeof(TCHAR), procEntry.szExeFile);
                    // std::cout << "Proc name: " << procEntry.szExeFile << std::endl;
                    break;
                 }

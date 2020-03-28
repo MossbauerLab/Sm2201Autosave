@@ -140,7 +140,7 @@ void MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::clearCmd()
 
 void MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::showStatus(bool status)
 {
-    bool colorApplyResult = true;
+    BOOL colorApplyResult = true;
     if (status)
     {
         colorApplyResult = SetConsoleTextAttribute(_hConsole, 2);

@@ -91,7 +91,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
-                                _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
@@ -146,7 +146,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
-                                _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
@@ -352,7 +352,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaInput(const 
     
     for(it = keys.begin(); it != keys.end(); it++)
     {
-        keyBoardInput.ki.wVk = (*it);
+        keyBoardInput.ki.wVk = (WORD)(*it);
         keyBoardInput.ki.dwFlags = 0;   // key down
         SendInput(1, &keyBoardInput, sizeof(INPUT));
         Sleep(keyPause);

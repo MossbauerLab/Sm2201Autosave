@@ -34,13 +34,13 @@ DWORD MossbauerLab::Utils::Windows::VxDAccessor::read(DWORD port, BYTE size)
     tagPort.wPort = (unsigned short) port;
     DWORD portValue = 0;
     DWORD bytesRead = 0;
-    bool readResult = DeviceIoControl(_hVxD, IO32_READPORT, &tagPort, sizeof(TagPort32), 
+    BOOL readResult = DeviceIoControl(_hVxD, IO32_READPORT, &tagPort, sizeof(TagPort32), 
                                       &portValue, sizeof(DWORD), &bytesRead, NULL);
     DWORD errorCode = GetLastError();
     return portValue;
 }
 
-bool MossbauerLab::Utils::Windows::VxDAccessor::write(DWORD port, DWORD value, BYTE size)
+BOOL MossbauerLab::Utils::Windows::VxDAccessor::write(DWORD port, DWORD value, BYTE size)
 {
     if (_hVxD == NULL)
         return false;
@@ -50,7 +50,7 @@ bool MossbauerLab::Utils::Windows::VxDAccessor::write(DWORD port, DWORD value, B
     tagPort.bSize = size;
     tagPort.wPort = (unsigned short) port;
     tagPort.dwValue = value;
-    bool writeResult = DeviceIoControl(_hVxD, IO32_WRITEPORT, &tagPort, sizeof(tagPort), 
+    BOOL writeResult = DeviceIoControl(_hVxD, IO32_WRITEPORT, &tagPort, sizeof(tagPort), 
                                        NULL, 0, &result, NULL);
     DWORD errorCode = GetLastError();
     return writeResult;
