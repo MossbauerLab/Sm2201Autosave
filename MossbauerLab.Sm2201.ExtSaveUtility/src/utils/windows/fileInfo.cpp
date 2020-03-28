@@ -81,21 +81,22 @@ MossbauerLab::Utils::Windows::FileSearchResult* MossbauerLab::Utils::Windows::Fi
 TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(const TCHAR* file)
 {
     int length = _tcslen(file);
+    int timestampedLength = length + 22;
     // file name would have following scheme: name_YYYY-MM-dd_HH-mm-ss.ext
-    TCHAR* timestampedName = new TCHAR[length + 21]; // 20 - timestamp len, 1 - 0
+    TCHAR* timestampedName = new TCHAR[timestampedLength]; // 20 - timestamp len, 1 - 0
     
-    memset(timestampedName, 0, (length + 21) * sizeof(TCHAR));
+    memset(timestampedName, 0, timestampedLength * sizeof(TCHAR));
     SYSTEMTIME timestamp = {0};
     GetLocalTime(&timestamp);
     int index = _tcscspn(file, _T("."));
-    int extensionLength = length - index + 1;
+    int extensionLength = length - index + 2;
     TCHAR* extensionBuffer = new TCHAR[extensionLength];
     memset(extensionBuffer, 0, (extensionLength) * sizeof(TCHAR));
-    _tcsncpy(timestampedName, file, index);
-    _tcsncpy(extensionBuffer, &file[index], extensionLength);
-    _stprintf(timestampedName, _T("%s_%04d-%02d-%02d_%02d-%02d-%02d%s"), timestampedName, timestamp.wYear, 
-              timestamp.wMonth, timestamp.wDay, timestamp.wHour, 
-              timestamp.wMinute, timestamp.wSecond, extensionBuffer);
+    _tcsncpy_s(timestampedName, timestampedLength, file, index);
+    _tcsncpy_s(extensionBuffer, extensionLength , &file[index], extensionLength);
+    _stprintf_s(timestampedName, timestampedLength, _T("%s_%04d-%02d-%02d_%02d-%02d-%02d%s"), 
+                timestampedName, timestamp.wYear, timestamp.wMonth, timestamp.wDay, 
+                timestamp.wHour, timestamp.wMinute, timestamp.wSecond, extensionBuffer);
     delete[] extensionBuffer;
     return timestampedName;
 }
