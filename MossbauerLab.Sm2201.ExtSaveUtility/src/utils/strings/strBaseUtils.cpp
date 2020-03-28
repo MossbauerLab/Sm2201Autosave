@@ -41,6 +41,43 @@ std::string MossbauerLab::Utils::Strings::StrBaseUtils::trim(const char *str, in
     return resultStr;
 }
 
+int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(TCHAR* str, TCHAR* subStr)
+{
+    if (*str == NULL || *subStr == NULL)
+        return -1;
+    TCHAR* scanningStr = *subStr;
+    bool matches = false;
+    int index = 0;
+    
+    while(*str != NULL)
+    {
+        if(!matches)
+        {
+            if (*str == *scanningStr)
+            {
+                matches = true;
+                scanningStr++;
+            }
+        }
+        else
+        {
+            if (*scanningStr == NULL) // end of searching str, return index ...
+            {
+                return index;
+            }
+
+            if(*str != *scanningStr)
+            {
+                matches = false;
+            }
+            scanningStr++;
+        }
+        str++;
+        index++;
+    }
+    return -1;
+}
+
 long MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(const std::string& str, int radix)
 {
     long value = 0;

@@ -24,6 +24,8 @@ namespace MossbauerLab
                 // directory MUST NOT ends with back clash, i.e. it MUST BE C:\\tmp
                 static FileSearchResult* getLastChangedFile(const TCHAR* directory, const TCHAR* searchPattern);
                 static TCHAR* getFileNameWithTimestamp(const TCHAR* file);
+                static TCHAR* getFileNameWithoutExt(const TCHAR* file);
+                static TCHAR* combinePath(const TCHAR* partOne, const TCHAR* partTwo);
             };
 
             class FileSearchResult

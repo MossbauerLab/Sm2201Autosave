@@ -127,3 +127,9 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(co
     delete[] extensionBuffer;
     return timestampedName;
 }
+
+TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(const TCHAR* file)
+{
+    //_tcsrchr(file,_T("\\"));
+    return NULL;
+}
