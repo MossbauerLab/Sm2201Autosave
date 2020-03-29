@@ -59,6 +59,10 @@ namespace MossbauerLab
                         TCHAR pattern3[6]=_T("saved");
                         index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str2, pattern3);
                         Assert::AreEqual(13, index);
+                        TCHAR str3[4] = _T("api");
+                        TCHAR pattern4[4] = _T("api");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str3, pattern4);
+                        Assert::AreEqual(0, index);
                     }
 
                     [TestMethod]
@@ -68,6 +72,16 @@ namespace MossbauerLab
                         TCHAR pattern1[4] = _T("api");
                         int index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(str, pattern1);
                         Assert::AreEqual(9, index);
+                        TCHAR str2[28] = _T("C:\\Autosaves\\specs\\1S210620");
+                        TCHAR pattern2[2] = _T("s");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(str2, pattern2);
+                        Assert::AreEqual(17, index);
+                        TCHAR pattern3[2] = _T("\\");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(str2, pattern3);
+                        Assert::AreEqual(18, index);
+                        TCHAR str3[29] = _T("C:\\Autosaves\\specs\\1S210620\\");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(str3, pattern3);
+                        Assert::AreEqual(27, index);
                     }
 
                 #pragma region InternalTestContext
