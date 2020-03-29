@@ -1,4 +1,5 @@
 #include "fileInfo.h"
+#include "strBaseUtils.h"
 
 MossbauerLab::Utils::Windows::FileSearchResult::FileSearchResult(bool result, TCHAR* fileName, TCHAR* filePath)
     :_result(result)
@@ -130,6 +131,14 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(co
 
 TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(const TCHAR* file)
 {
-    //_tcsrchr(file,_T("\\"));
-    return NULL;
+    TCHAR dirSeparator[2] = _T("\\");
+    TCHAR dotSeparator[2] = _T(".");
+    int index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(file, dirSeparator);
+    TCHAR* fileName = file;
+    if (index != -1)
+        fileName += (index + 1);
+    int separatorIndex = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(file, dotSeparator);
+    int length = (index > 0 ? separatorIndex - index : separatorIndex) + 1;
+    TCHAR* fileNameBuffer = new TCHAR[length];
+    return fileNameBuffer;
 }
