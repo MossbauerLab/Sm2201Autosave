@@ -63,6 +63,9 @@ namespace MossbauerLab
                         TCHAR pattern4[4] = _T("api");
                         index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str3, pattern4);
                         Assert::AreEqual(0, index);
+                        TCHAR pattern5[5] = _T("apic");
+                        index = MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(str3, pattern5);
+                        Assert::AreEqual(-1, index);
                     }
 
                     [TestMethod]
