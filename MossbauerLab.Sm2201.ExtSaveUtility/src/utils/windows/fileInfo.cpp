@@ -134,11 +134,12 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(const
     TCHAR dirSeparator[2] = _T("\\");
     TCHAR dotSeparator[2] = _T(".");
     int index = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(file, dirSeparator);
-    TCHAR* fileName = file;
+    const TCHAR* fileName = file;
     if (index != -1)
         fileName += (index + 1);
     int separatorIndex = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(file, dotSeparator);
     int length = (index > 0 ? separatorIndex - index : separatorIndex) + 1;
     TCHAR* fileNameBuffer = new TCHAR[length];
+    _tcsncpy_s(fileNameBuffer, length, fileName, length - 1);
     return fileNameBuffer;
 }

@@ -47,6 +47,17 @@ namespace MossbauerLab
                         Assert::IsTrue(_tcslen(timestampedFileName) > _tcslen(fileName));
                     }
 
+                    [TestMethod]
+                    void TestGetFileNameWithoutExtension()
+                    {
+                        TCHAR* fileName = _T("1S010220.spc");
+                        TCHAR* fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(fileName);
+                        Assert::AreEqual(gcnew String(_T("1S010220")), gcnew String(fileNameWithoutExt));
+                        fileName = _T("C:\\Autosaves\\specs\\1S010220.spc");
+                        fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(fileName);
+                        Assert::AreEqual(gcnew String(_T("1S010220")), gcnew String(fileNameWithoutExt));
+                    }
+
                 #pragma region InternalTestContext
                 private:
                     TestContext^ testContextInstance;

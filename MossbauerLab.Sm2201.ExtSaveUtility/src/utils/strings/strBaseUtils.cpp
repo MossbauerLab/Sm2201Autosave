@@ -79,6 +79,7 @@ int MossbauerLab::Utils::Strings::StrBaseUtils::indexOf(const TCHAR* str, const 
         str++;
         index++;
     }
+
     if (matches && *scanningStr == NULL)
         return matchIndex;
     return -1;
@@ -93,6 +94,8 @@ int MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(const TCHAR* str, co
     const TCHAR* srcStr = str;
     int index = 0;
     int cycle = 0;
+    bool anyMatch = false;
+
     while(index != -1)
     {
         index = indexOf(srcStr, subStr);
@@ -101,8 +104,13 @@ int MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(const TCHAR* str, co
             searchIndex += index;
             srcStr += index + subStrLen;
             cycle++;
+            anyMatch = true;
         }
     }
+
+    if (!anyMatch)
+        return -1;
+
     if (searchIndex > 0)
         searchIndex += subStrLen * (cycle - 1);
     return searchIndex;
