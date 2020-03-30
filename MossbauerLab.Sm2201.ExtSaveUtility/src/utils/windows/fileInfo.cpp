@@ -138,8 +138,15 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(const
     if (index != -1)
         fileName += (index + 1);
     int separatorIndex = MossbauerLab::Utils::Strings::StrBaseUtils::lastIndexOf(file, dotSeparator);
-    int length = (index > 0 ? separatorIndex - index : separatorIndex) + 1;
-    TCHAR* fileNameBuffer = new TCHAR[length];
-    _tcsncpy_s(fileNameBuffer, length, fileName, length - 1);
+    int length = 0;
+    if (separatorIndex == -1)
+    {
+        int fileLength = _tcslen(file);
+        length = index > 0 ? fileLength - index : fileLength;
+    }
+    else 
+        length = index > 0 ? separatorIndex - index - 1 : separatorIndex;
+    TCHAR* fileNameBuffer = new TCHAR[length + 1];
+    _tcsncpy_s(fileNameBuffer, length + 1, fileName, length);
     return fileNameBuffer;
 }

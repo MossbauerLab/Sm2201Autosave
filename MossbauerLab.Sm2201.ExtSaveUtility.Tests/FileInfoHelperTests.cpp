@@ -56,6 +56,12 @@ namespace MossbauerLab
                         fileName = _T("C:\\Autosaves\\specs\\1S010220.spc");
                         fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(fileName);
                         Assert::AreEqual(gcnew String(_T("1S010220")), gcnew String(fileNameWithoutExt));
+                        fileName = _T("1S010220");
+                        fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(fileName);
+                        Assert::AreEqual(gcnew String(_T("1S010220")), gcnew String(fileNameWithoutExt));
+                        fileName = _T("C:\\Autosaves\\specs\\1S010220");
+                        fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(fileName);
+                        Assert::AreEqual(gcnew String(_T("1S010220")), gcnew String(fileNameWithoutExt));
                     }
 
                 #pragma region InternalTestContext
