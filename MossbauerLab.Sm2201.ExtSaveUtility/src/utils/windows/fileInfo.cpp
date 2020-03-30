@@ -147,6 +147,11 @@ TCHAR* MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(const
     else 
         length = index > 0 ? separatorIndex - index - 1 : separatorIndex;
     TCHAR* fileNameBuffer = new TCHAR[length + 1];
-    _tcsncpy_s(fileNameBuffer, length + 1, fileName, length);
+    memset(fileNameBuffer, 0, (length + 1) * sizeof(TCHAR));
+    #if WINVER >= 0x0500
+        _tcsncpy_s(fileNameBuffer, length + 1, fileName, length);
+    #else
+        _tcsncpy(fileNameBuffer, fileName, length);
+    #endif
     return fileNameBuffer;
 }

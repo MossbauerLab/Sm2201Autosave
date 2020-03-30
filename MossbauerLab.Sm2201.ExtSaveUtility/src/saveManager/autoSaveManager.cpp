@@ -90,14 +90,20 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.1 Getting timestamped filename
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 TCHAR* fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(searchResult->getFileName());
+                                TCHAR archiveDirWithSubDir[MAX_PATH];
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
+                                memset(archiveDirWithSubDir, 0, MAX_PATH * sizeof(TCHAR));
                                 #if WINVER >= 0x0500
-                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                    _stprintf_s(archiveDirWithSubDir, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), fileNameWithoutExt);
+                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), archiveDirWithSubDir, timestampedFileName);
                                 #else
-                                    _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                    _stprintf(archiveDirWithSubDir, _T("%s\\%s"), config->getArchiveDir().c_str(), fileNameWithoutExt);
+                                    _stprintf(fullOutputName, _T("%s\\%s"), archiveDirWithSubDir, timestampedFileName);
                                 #endif
                                 // 3.3 Save
+                                // 3.3.1 Create Sub Directory if not Exists
+                                CreateDirectory(archiveDirWithSubDir, NULL);
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
                                 delete[] fileNameWithoutExt;
@@ -142,7 +148,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
                                             config->getOutputDir().c_str());
                             #else
-                                sprintf(outputDir, _T("%hs"), config->getOutputDir().c_str());
+                                _stprintf(outputDir, _T("%hs"), config->getOutputDir().c_str());
                             #endif
                             MossbauerLab::Utils::Windows::FileSearchResult* searchResult = MossbauerLab::Utils::Windows::FileInfoHelper::getLastChangedFile(outputDir, _T("\\*.spc"));
                             if (searchResult->getResult())
@@ -151,14 +157,22 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.1 Getting timestamped filename
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
                                 TCHAR* fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(searchResult->getFileName());
+                                TCHAR archiveDirWithSubDir[MAX_PATH];
+                                memset(archiveDirWithSubDir, 0, MAX_PATH * sizeof(TCHAR));
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
                                 #if WINVER >= 0x0500
-                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                    _stprintf_s(archiveDirWithSubDir, MAX_PATH, _T("%s\\%s"), 
+                                                config->getArchiveDir().c_str(), fileNameWithoutExt);
+                                    _stprintf_s(fullOutputName, MAX_PATH, _T("%s\\%s"), 
+                                                archiveDirWithSubDir, timestampedFileName);
                                 #else
-                                    _stprintf(fullOutputName, _T("%s\\%s"), config->getArchiveDir().c_str(), timestampedFileName);
+                                    _stprintf(archiveDirWithSubDir, _T("%s\\%s"), config->getArchiveDir().c_str(), fileNameWithoutExt);
+                                    _stprintf(fullOutputName, _T("%s\\%s"), archiveDirWithSubDir, timestampedFileName);
                                 #endif
                                 // 3.3 Save
+                                // 3.3.1 Create Sub Directory
+                                CreateDirectory(archiveDirWithSubDir, NULL);
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
                                 delete[] fileNameWithoutExt;
