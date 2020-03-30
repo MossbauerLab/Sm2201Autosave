@@ -89,6 +89,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3. Copy to archiveDir
                                 // 3.1 Getting timestamped filename
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
+                                TCHAR* fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
                                 #if WINVER >= 0x0500
@@ -99,6 +100,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
+                                delete[] fileNameWithoutExt;
                             }
                             delete searchResult;
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH1_SAVED);
@@ -148,6 +150,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3. Copy to archiveDir
                                 // 3.1 Getting timestamped filename
                                 TCHAR* timestampedFileName = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithTimestamp(searchResult->getFileName());
+                                TCHAR* fileNameWithoutExt = MossbauerLab::Utils::Windows::FileInfoHelper::getFileNameWithoutExt(searchResult->getFileName());
                                 // 3.2 Combine with autosaveDir
                                 memset(fullOutputName, 0, MAX_PATH * sizeof(TCHAR));
                                 #if WINVER >= 0x0500
@@ -158,6 +161,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                                 // 3.3 Save
                                 CopyFile(searchResult->getFilePath(), fullOutputName, false);
                                 delete[] timestampedFileName;
+                                delete[] fileNameWithoutExt;
                             }
                             delete searchResult;
                             MossbauerLab::Sm2201::SaveManager::ApplicationTextUserInterface::drawMsgStatus(MS_FROM_CH2_SAVED);
