@@ -55,6 +55,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
 
     TCHAR outputDir[MAX_PATH];
     TCHAR fullOutputName [MAX_PATH];
+    bool firstSave = true;
 
     while(manager->isRunning())
     {
@@ -76,7 +77,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_PORT_DRV);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 1, VXD_PORT_DRV, firstSave);
+                            firstSave = false;
                             // 2. Get last saved file from outputDir
                             #if WINVER >= 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), config->getOutputDir().c_str());
@@ -142,7 +144,8 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
                         if(numberOfWindows == 1)
                         {
                             // 1. Send Key Sequence
-                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_PORT_DRV);
+                            manager->sendKeysSequence(selectedWindows[0].hWnd, 2, VXD_PORT_DRV, firstSave);
+                            firstSave = false;
                             // 2. Get last saved file from outputDir
                             #if WINVER >= 0x0500
                                 _stprintf_s(outputDir, sizeof(outputDir)/sizeof(TCHAR), _T("%hs"), 
@@ -217,6 +220,7 @@ DWORD WINAPI TimerThreadFunc (LPVOID lpParam)
         // state is Off
         else
         {
+            firstSave = true;
             channellElapsedTime = 0;
             channel2ElapsedTime = 0;
             Sleep(CHECK_INTERVAL);
@@ -298,7 +302,28 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::activateWindow(HWND win
     SendMessage(window, WM_ACTIVATE, WA_CLICKACTIVE, 0);
 }
 
-void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND window, int channel, int technology)
+bool MossbauerLab::Sm2201::SaveManager::AutoSaveManager::shouldSendArrow(int channel, bool firstSave)
+{
+    // we assume here that initially cursor was set to ch. 1
+    if (_config->isChannelOneUsing() && _config->isChannelTwoUsing())
+    {
+        if (!firstSave)
+            return true;
+        if (channel == 1)
+            return false;
+        return true; // channel 2
+    }
+
+    if (_config->isChannelOneUsing() && !_config->isChannelTwoUsing())
+        return false;
+
+    if(!_config->isChannelOneUsing() && _config->isChannelTwoUsing())
+        return firstSave;
+
+    return false;
+}
+
+void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND window, int channel, int technology, bool firstSave)
 {
     // 0. make window active
     activateWindow(window);
@@ -306,9 +331,12 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     if (technology == WINDOWS_MSG || technology == SEND_INPUT) //sending via Windows MSG
     {  
         std::vector<DWORD> charCodes;
-        if (channel == 1)
-            charCodes.push_back(VK_LEFT);
-        else charCodes.push_back(VK_RIGHT);
+        if (shouldSendArrow(channel, firstSave))
+        {
+            if (channel == 1)
+                charCodes.push_back(VK_LEFT);
+            else charCodes.push_back(VK_RIGHT);
+        }
         charCodes.push_back(0x43);      // continue
         charCodes.push_back(VK_RETURN); // scaling coeff
         charCodes.push_back(VK_RETURN); // stop update
@@ -325,9 +353,12 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     else if (technology == DIRECT_PORT_WRITE)
     {
         std::vector<BYTE> scanCodes;
-        if (channel == 1)
-            scanCodes.push_back(0x4B);     // Left Arrow
-        else scanCodes.push_back(0x4D);    // Right Arrow
+        if (shouldSendArrow(channel, firstSave))
+        {
+            if (channel == 1)
+                scanCodes.push_back(0x4B);     // Left Arrow
+            else scanCodes.push_back(0x4D);    // Right Arrow
+        }
         scanCodes.push_back(0x2E);         // C
         scanCodes.push_back(0x1C);         // Enter
         scanCodes.push_back(0x1C);         // Enter
@@ -340,9 +371,12 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
     else if (technology == VXD_PORT_DRV)
     {
         std::vector<BYTE> scanCodes;
-        if (channel == 1)
-            scanCodes.push_back(0x4B);     // Left Arrow
-        else scanCodes.push_back(0x4D);    // Right Arrow
+        if (shouldSendArrow(channel, firstSave))
+        {
+            if (channel == 1)
+                scanCodes.push_back(0x4B);     // Left Arrow
+            else scanCodes.push_back(0x4D);    // Right Arrow
+        }
         scanCodes.push_back(0x2E);         // C
         scanCodes.push_back(0x1C);         // Enter
         scanCodes.push_back(0x1C);         // Enter

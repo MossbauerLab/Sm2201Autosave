@@ -30,10 +30,11 @@ namespace MossbauerLab
                 inline bool isRunning() const {return _threadRunning;}
                 inline MossbauerLab::Sm2201::Config::SchedulerConfig* getConfig() const {return _config;}
                 void reloadConfig();
-                void sendKeysSequence(HWND window, int channel, int technology = 0);
+                void sendKeysSequence(HWND window, int channel, int technology = 0, bool firstSave = false);
             private:
                 void restoreWindow(HWND window);
                 void activateWindow(HWND window);
+                bool shouldSendArrow(int channel, bool firstSave);
                 void sendKeysViaWindowMsg(HWND window, const std::vector<DWORD>& keys, int keyPause = 500);
                 // HERE we send scancodes from group 1
                 void sendKeysViaKeyboardController(const std::vector<BYTE>& scanCodes, int keyPause = 500);
