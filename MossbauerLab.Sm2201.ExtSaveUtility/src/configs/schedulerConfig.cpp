@@ -8,6 +8,7 @@ static std::string channelOnePeriodKey = "channel1Period"; // SAVE PERION ON CH1
 static std::string channelTwoPeriodKey = "channel2Period"; // SAVE PERION ON CH2 IN SECS, 1 - xxxx
 static std::string outputDirKey = "outputDir"; // Directory where SM2201 saves spectra
 static std::string archiveDirKey = "archiveDir"; // Directory where we should save spectra from outputDir
+static std::string keySendTimeoutKey = "keyPressTimeout";
 
 MossbauerLab::Sm2201::Config::SchedulerConfig::SchedulerConfig(const std::string& schedulerConfigFile)
 {
@@ -35,4 +36,6 @@ void MossbauerLab::Sm2201::Config::SchedulerConfig::reload()
     _channelTwoPeriod = MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(value, 10);
     _outputDir = reader->get(outputDirKey);
     _archiveDir = reader->get(archiveDirKey);
+    value = reader->get(keySendTimeoutKey);
+    _keySendTimeout = MossbauerLab::Utils::Strings::StrBaseUtils::parseLong(value, 10);
 }

@@ -1,9 +1,8 @@
 #ifndef SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 #define SM2201_SPECTRUM_SAVER_SRC_CONFIG_SCHEDULER_CONFIG_H
 
-#if WINVER < 0x0500
-    #pragma warning(disable:4786)
-#endif
+#pragma warning(disable:4786)
+#pragma comment(linker, "/IGNORE:4786")
 
 #include <string>
 #include "propertyReader.h"
@@ -27,6 +26,7 @@ namespace MossbauerLab
                 inline long getChannelTwoPeriod() const {return _channelTwoPeriod;}
                 inline const std::string& getOutputDir() const {return _outputDir;}
                 inline const std::string& getArchiveDir() const {return _archiveDir;}
+                inline long getKeySendTimeout() const {return _keySendTimeout;}
             private:
                 MossbauerLab::Utils::Config::PropertyReader* reader;
                 bool _state;
@@ -36,6 +36,7 @@ namespace MossbauerLab
                 long _channelTwoPeriod;
                 std::string _outputDir;
                 std::string _archiveDir;
+                long _keySendTimeout;
             };
         }
     }

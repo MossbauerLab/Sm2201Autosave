@@ -327,7 +327,9 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
 {
     // 0. make window active
     activateWindow(window);
-
+    long timeout = _config->getKeySendTimeout();
+    if (timeout <= 0)
+        timeout = KEY_SEND_INTERVAL;
     if (technology == WINDOWS_MSG || technology == SEND_INPUT) //sending via Windows MSG
     {  
         std::vector<DWORD> charCodes;
@@ -383,7 +385,7 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysSequence(HWND w
         scanCodes.push_back(0x11);         // W
         scanCodes.push_back(0x1C);         // Enter
         scanCodes.push_back(0x15);         // Y
-        sendKeysViaPortVxdDriver(scanCodes);
+        sendKeysViaPortVxdDriver(scanCodes, timeout);
     }
 
 }
@@ -471,15 +473,18 @@ void MossbauerLab::Sm2201::SaveManager::AutoSaveManager::sendKeysViaPortVxdDrive
 
         // send scan code for key down
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
+        Sleep(100);
         _vxdAccessor->write(KEYBOARD_DATA_REG, (*it), 1);
         result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
         //std::cout <<"Keyboard command result for KEY DOWN: "<< result << std::endl;
         // send scan code for key up
         BYTE keyUpCode = (*it) | 128;
-        Sleep(keyPause);
+        Sleep(200);
         _vxdAccessor->write(KEYBOARD_CMD_REG, 0xD2, 1);
+        Sleep(100);
         _vxdAccessor->write(KEYBOARD_DATA_REG, keyUpCode, 1);
         result = _vxdAccessor->read(KEYBOARD_DATA_REG, 1);
+        //Sleep(keyPause);
         //std::cout <<"Keyboard command result for KEY UP: "<< result << std::endl;
     }
 }
